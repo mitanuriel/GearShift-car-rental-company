@@ -1,6 +1,8 @@
 CREATE DATABASE bilabonnement;
 
 USE bilabonnement;
+Create user 'bruger5' identified  by '12345';
+grant select, insert, delete, update on bilabonnement.* to 'bruger5';
 
 CREATE TABLE car (
     car_id INT AUTO_INCREMENT,
