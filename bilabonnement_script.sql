@@ -9,9 +9,9 @@ CREATE TABLE car (
     model VARCHAR(255),
     monthly_price FLOAT,
     brand VARCHAR(255),
-    stel_number FLOAT,
+    chassis_number FLOAT,
     co2_emissions VARCHAR(255),
-    equipment_level VarChar(255),
+    equipment_level VARCHAR(255),
     state ENUM('In storage', 'Being used', 'Under inspection'),
     PRIMARY KEY (car_id)
 );
