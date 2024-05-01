@@ -1,17 +1,12 @@
 CREATE DATABASE bilabonnement;
 
 USE bilabonnement;
-Create user 'bruger5' identified  by '12345';
-grant select, insert, delete, update on bilabonnement.* to 'bruger5';
 
 CREATE TABLE car (
     car_id INT AUTO_INCREMENT,
     model VARCHAR(255),
     monthly_price FLOAT,
     brand VARCHAR(255),
-    chassis_number FLOAT,
-    co2_emissions VARCHAR(255),
-    equipment_level VARCHAR(255),
     state ENUM('In storage', 'Being used', 'Under inspection'),
     PRIMARY KEY (car_id)
 );
