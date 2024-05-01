@@ -7,6 +7,9 @@ CREATE TABLE car (
     model VARCHAR(255),
     monthly_price FLOAT,
     brand VARCHAR(255),
+    stelnummer FLOAT,
+    co2emissions VARCHAR(255),
+    Equipmentlevel VarChar(255),
     state ENUM('In storage', 'Being used', 'Under inspection'),
     PRIMARY KEY (car_id)
 );
