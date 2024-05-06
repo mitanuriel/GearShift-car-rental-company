@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car list</title>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.monthly_price}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.chassis_number}"></td>
+            <td th:text="${car.co2_emissions}"></td>
+            <td th:text="${car.equipment_level}"></td>
+            <td th:text="${car.state}"></td>
+        </tr>
+    </table>
+
+    <form action="/editCar" method="get">
+        <input type="hidden" name="car_id" th:value="${car.car_id}">
+        <input type="submit" value="Edit this car">
+    </form>
+    <form action="/deleteCar" method="post">
+        <input type="hidden" name="car_id" th:value="${car.car_id}">
+        <input type="submit" value="Delete this car">
+    </form>
+    <form action="/showCars" method="get">
+        <input type="submit" value="Go back">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Create Contract</h2>
+<p th:text="${message}"> </p>
+<form action="/newcontract1" method="POST">
+    <label for="customer_id">Customer ID:</label>
+    <input type="number" id="customer_id" name="customer_id" required>
+
+    <label for="car_id">Car ID:</label>
+    <input type="number" id="car_id" name="car_id" required>
+
+    <label for="contract_start">Contract Start Date:</label>
+    <input type="date" id="contract_start" name="contract_start" required>
+
+    <label for="contract_end">Contract End Date:</label>
+    <input type="date" id="contract_end" name="contract_end" required>
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" step="0.01" required>
+
+    <button type="submit">Create Contract</button>
+</form>
+</body>
+</html>

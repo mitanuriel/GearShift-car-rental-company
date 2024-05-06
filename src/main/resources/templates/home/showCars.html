@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car list</title>
+</head>
+<body>
+
+    <form action="/newCar" method="get">
+        <input type="submit" value="Add new car">
+    </form>
+
+    <table th:each="car : ${cars}">
+        <tr><td th:text="${car.model}"></td></tr>
+        <tr><td th:text="${car.monthly_price}"></td></tr>
+        <tr><td th:text="${car.brand}"></td></tr>
+        <tr><td th:text="${car.chassis_number}"></td></tr>
+        <tr><td th:text="${car.co2_emissions}"></td></tr>
+        <tr><td th:text="${car.equipment_level}"></td></tr>
+        <tr><td th:text="${car.state}"></td></tr>
+        <tr>    
+            <td>
+                <form action="/carDetails" method="get">
+                    <input type="hidden" name="car_id" th:value="${car.car_id}">
+                    <input type="submit" value="Select">
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

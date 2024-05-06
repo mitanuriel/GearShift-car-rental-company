@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new car</title>
+</head>
+<body>
+
+    <form action="/updateDB" method="post" th:object="${car}">
+        <table>
+            <tr>
+                <td>Model</td>
+                <td>
+                    <input type="text" placeholder="Required" th:field="*{model}" autofocus required>
+                </td>
+            </tr>
+            <tr>
+                <td>Monthly price</td>
+                <td>
+                    <input type="number" placeholder="Price in DKK" min="0" step="0.01" th:field="*{monthly_price}">
+                </td>
+            </tr>
+            <tr>
+                <td>Brand</td>
+                <td>
+                    <input type="text" th:field="*{brand}">
+                </td>
+            </tr>
+            <tr>
+                <td>Chassis number</td>
+                <td>
+                    <input type="number" th:field="*{chassis_number}">
+                </td>
+            </tr>
+            <tr>
+                <td>CO2 emissions</td>
+                <td>
+                    <input type="text" th:field="*{co2_emissions}">
+                </td>
+            </tr>
+            <tr>
+                <td>Equipment level</td>
+                <td>
+                    <input type="text" th:field="*{equipment_level}">
+                </td>
+            </tr>
+            <tr>
+                <td>State</td>
+                <td>
+                    <input type="text" th:field="*{state}">
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" th:field="*{car_id}">
+        <input type="hidden" name="action" th:value="${action}">
+        <input type="submit" value="Save">
+    </form>
+
+    <form action="/showCars" method="get" th:if="${action == 'insert'}">
+        <input type="submit" value="Cancel">
+    </form>
+    <form action="/carDetails" method="get" th:if="${action == 'update'}">
+        <input type="hidden" name="car_id" th:value="${car.car_id}">
+        <input type="submit" value="Cancel">
+    </form>
+</div>
+
+</body>
+</html>
