@@ -1,0 +1,8 @@
+[
+  {
+    "name": "com.example.carrental.model.Car",
+    "allDeclaredFields": true,
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  }
+]

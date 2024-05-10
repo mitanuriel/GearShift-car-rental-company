@@ -5,11 +5,26 @@
 </head>
 <body>
 
-    <form action="/newCar" method="get">
+    <form action="/newCar" method="post">
+        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
         <input type="submit" value="Add new car">
     </form>
 
+    <form action="/showCars" method="get">
+        <select name="stateFilter">
+            <option th:selected="${stateFilter == 'All'}">All</option>
+            <option th:selected="${stateFilter == 'In storage'}">In storage</option>
+            <option th:selected="${stateFilter == 'Being used'}">Being used</option>
+            <option th:selected="${stateFilter == 'Under inspection'}">Under inspection</option>
+        </select>
+        <input type="submit" value="Filter list">
+    </form>
+
     <table th:each="car : ${cars}">
+        <tr th:if="${car.image != null}">
+            <img th:src="@{'data:image/*;base64,' + ${car.encodeImageToBase64String()}}" width="200">
+        </tr>
+        <tr th:if="${car.image == null}">[No image]</tr>
         <tr><td th:text="${car.model}"></td></tr>
         <tr><td th:text="${car.monthly_price}"></td></tr>
         <tr><td th:text="${car.brand}"></td></tr>
@@ -21,6 +36,7 @@
             <td>
                 <form action="/carDetails" method="get">
                     <input type="hidden" name="car_id" th:value="${car.car_id}">
+                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
                     <input type="submit" value="Select">
                 </form>
             </td>

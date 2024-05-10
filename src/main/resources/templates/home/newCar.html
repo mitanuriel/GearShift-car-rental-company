@@ -6,8 +6,17 @@
 </head>
 <body>
 
-    <form action="/updateDB" method="post" th:object="${car}">
+    <form id="carForm" action="/updateDB" method="post" th:object="${car}" enctype="multipart/form-data">
         <table>
+            <tr>
+                <td th:if="${car.image != null}">
+                    <img th:src="@{'data:image/*;base64,' + ${car.encodeImageToBase64String()}}" width="200">
+                </td>
+                <td th:if="${car.image == null}">Select image</td>
+                <td>
+                    <input type="file" name="newImage" accept="image/*">
+                </td>
+            </tr>
             <tr>
                 <td>Model</td>
                 <td>
@@ -47,23 +56,41 @@
             <tr>
                 <td>State</td>
                 <td>
-                    <input type="text" th:field="*{state}">
+                    <select th:field="*{state}">
+                        <option value="In storage">In storage</option>
+                        <option value="Being used">Being used</option>
+                        <option value="Under inspection">Under inspection</option>
+                    </select>
                 </td>
             </tr>
         </table>
         <input type="hidden" th:field="*{car_id}">
         <input type="hidden" name="action" th:value="${action}">
-        <input type="submit" value="Save">
+        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+        <input type="hidden" name="oldImage" th:value="${car.encodeImageToBase64String()}" th:if="${car.image != null}">
+        <input type="hidden" name="oldImage" value="No image" th:if="${car.image == null}">
     </form>
 
-    <form action="/showCars" method="get" th:if="${action == 'insert'}">
-        <input type="submit" value="Cancel">
-    </form>
-    <form action="/carDetails" method="get" th:if="${action == 'update'}">
-        <input type="hidden" name="car_id" th:value="${car.car_id}">
-        <input type="submit" value="Cancel">
-    </form>
-</div>
+    <table>
+        <tr>
+            <td>
+                <input form="carForm" type="submit" value="Save">
+            </td>
+            <td th:if="${action == 'insert'}">
+                <form action="/showCars" method="get">
+                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                    <input type="submit" value="Cancel">
+                </form>
+            </td>
+            <td th:if="${action == 'update'}">
+                <form action="/carDetails" method="get">
+                    <input type="hidden" name="car_id" th:value="${car.car_id}">
+                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                    <input type="submit" value="Cancel">
+                </form>
+            </td>
+        </tr>
+    </table>
 
 </body>
 </html>

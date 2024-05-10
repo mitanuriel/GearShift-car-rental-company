@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new car</title>
+</head>
+<body>
+
+    <form action="/updateDamages" method="post" th:object="${damages}">
+        <table>
+            <tr>
+                <td>Description</td>
+                <td>
+                    <textarea th:field="*{description}"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>
+                    <input type="number" placeholder="Price in DKK" min="0" step="0.01" th:field="*{price}">
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" th:field="*{damages_id}">
+        <input type="hidden" th:field="*{contract_id}">
+    </form>
+
+    
+    <form action="/contractDetails" method="get">
+        <input type="hidden" name="contract_id" th:value="${contract.contract_id}">
+        <input type="submit" value="Cancel">
+    </form>
+           
+
+</body>
+</html>

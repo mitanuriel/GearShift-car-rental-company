@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new car</title>
+</head>
+<body>
+    <p>File must be an image</p>
+    <form action="/notImage" method="post" th:object="${car}">
+        <input type="hidden" name="action" th:value="${action}">
+        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+        <input type="hidden" th:field="*{car_id}">
+        <input type="hidden" th:field="*{model}">
+        <input type="hidden" th:field="*{monthly_price}">
+        <input type="hidden" th:field="*{brand}">
+        <input type="hidden" th:field="*{chassis_number}">
+        <input type="hidden" th:field="*{co2_emissions}">
+        <input type="hidden" th:field="*{equipment_level}">
+        <input type="hidden" th:field="*{state}">
+        <input type="hidden" name="oldImage" th:value="${oldImage}">
+        <input type="submit" value="OK">
+    </form>
+</body>
+</html>

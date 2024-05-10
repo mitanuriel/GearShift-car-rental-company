@@ -1,5 +1,7 @@
 package com.example.carrental.model;
 
+import java.util.Base64;
+
 public class Car {
     private int car_id;
     private String model;
@@ -9,8 +11,17 @@ public class Car {
     private String co2_emissions;
     private String equipment_level;
     private String state;
+    private byte[] image;
 
     public Car() {
+    }
+
+    public String encodeImageToBase64String() {
+        return Base64.getEncoder().encodeToString(image);
+    }
+
+    public void decodeBase64StringToImage(String base64String) {
+        setImage(Base64.getDecoder().decode(base64String));
     }
 
     public int getCar_id() {
@@ -75,5 +86,13 @@ public class Car {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

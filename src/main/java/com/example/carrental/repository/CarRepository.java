@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public class CarRepository {
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public CarRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -26,10 +26,16 @@ public class CarRepository {
         return jdbcTemplate.queryForObject(query, rowMapper, car_id);
     }
 
+    public List<Car> getCarsByState(String state) {
+        String query = "SELECT * FROM car WHERE state = ?;";
+        BeanPropertyRowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return jdbcTemplate.query(query, rowMapper, state);
+    }
+
     public void insert(Car car) {
-        String query = "INSERT INTO car(model, monthly_price, brand, chassis_number, co2_emissions, equipment_level, state) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?);";
-        jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getChassis_number(), car.getCo2_emissions(), car.getEquipment_level(), car.getState());
+        String query = "INSERT INTO car(model, monthly_price, brand, chassis_number, co2_emissions, equipment_level, state, image) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getChassis_number(), car.getCo2_emissions(), car.getEquipment_level(), car.getState(), car.getImage());
     }
 
     public void delete(int car_id) {
@@ -39,8 +45,8 @@ public class CarRepository {
 
     public void update(Car car) {
         String query = "UPDATE car "
-                + "SET model = ?, monthly_price = ?, brand = ?, chassis_number = ?, co2_emissions = ?, equipment_level = ?, state = ? "
+                + "SET model = ?, monthly_price = ?, brand = ?, chassis_number = ?, co2_emissions = ?, equipment_level = ?, state = ?, image = ? "
                 + "WHERE car_id = ?;";
-        jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getChassis_number(), car.getCo2_emissions(), car.getEquipment_level(), car.getState(), car.getCar_id());
+        jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getChassis_number(), car.getCo2_emissions(), car.getEquipment_level(), car.getState(), car.getImage(), car.getCar_id());
     }
 }

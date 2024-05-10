@@ -23,6 +23,10 @@ public class CarService {
         return carRepository.getCar(car_id);
     }
 
+    public List<Car> getCarsByState(String state) {
+        return carRepository.getCarsByState(state);
+    }
+
     public void insert(Car car) {
         carRepository.insert(car);
     }
