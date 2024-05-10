@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table> <tr>
+    <p></p>
+    <form action="/updateContract" method="POST">
+
+        <input type="hidden" name="contract_id" th:value="${contractedit.contract_id}">
+
+        <!-- Input fields pre-filled with the contract data -->
+        <label for="customer_id">Customer ID:</label>
+        <input type="text" id="customer_id" name="custumer_id" th:value="${contractedit.customer_id}" required>
+        <br>
+
+        <label for="car_id">Car ID:</label>
+        <input type="text" id="car_id" name="car_id" th:value="${contractedit.car_id}" required>
+        <br>
+
+
+
+        <label for="contract_start">Contract Start:</label>
+        <input type="date" id="contract_start" name="contract_start" th:value="${contractedit.contract_start}" required>
+        <br>
+
+        <label for="contract_end">Contract End:</label>
+        <input type="date" id="contract_end" name="contract_end" th:value="${contractedit.contract_end}" required>
+        <br>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" th:value="${contractedit.price}" step="0.01" required>
+        <br>
+
+        <!-- Submit and Cancel buttons -->
+        <button type="submit">Update Contract</button>
+        <a href="/Contracts">Cancel</a>
+
+    </form>
+
+</tr>
+</table>
+
+
+
+</body>
+</html>

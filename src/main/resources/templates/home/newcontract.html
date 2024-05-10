@@ -7,6 +7,7 @@
 <body>
 <h2>Create Contract</h2>
 <p th:text="${message}"> </p>
+
 <form action="/newcontract1" method="POST">
     <label for="customer_id">Customer ID:</label>
     <input type="number" id="customer_id" name="customer_id" required>
@@ -25,5 +26,17 @@
 
     <button type="submit">Create Contract</button>
 </form>
+
+<form action="/showprice" method="GET">
+    <button type="submit">Show price</button>
+
+</form>
+
+<form action="/gotomenu" method="GET">
+    <div>
+        <button type="submit">Go To Menu</button>
+    </div>
+</form>
+<p th:text="${price}"></p>
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form action="/ShowRepport">
+    <label for="start">Contract Start Date:</label>
+    <input type="date" id="start" name="start" required>
+
+    <label for="end">Contract End Date:</label>
+    <input type="date" id="end" name="end" required>
+
+    <button type="submit">Show price</button>
+
+</form>
+<p th:text="${timeprice}"></p>
+
+<form action="/gotomenu" method="GET">
+    <div>
+        <button type="submit">Go To Menu</button>
+    </div>
+</form>
+</body>
+</html>

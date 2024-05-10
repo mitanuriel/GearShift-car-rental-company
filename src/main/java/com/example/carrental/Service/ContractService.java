@@ -28,4 +28,13 @@ public class ContractService {
     public List<Contract> getlist() {
         return contractRepository.getlist();
     }
+
+    public Contract getContract(int contractId) {
+        return contractRepository.getContract(contractId);
+    }
+
+
+    public void updateContract(int contract_id,int custumerId, int carId, LocalDate contractStart, LocalDate contractEnd, double price) {
+        contractRepository.updateContract(contract_id,custumerId,carId,contractStart,contractEnd,price);
+    }
 }

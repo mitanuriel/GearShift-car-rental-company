@@ -4,6 +4,7 @@ package com.example.carrental.Controller;
 import com.example.carrental.Model.Contract;
 import com.example.carrental.Repository.ContractRepository;
 import com.example.carrental.Service.ContractService;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Controller
@@ -32,43 +34,98 @@ public class ContractController {
     @PostMapping("/newcontract1")
     private String addContract(Model model,@RequestParam int customer_id, @RequestParam int car_id, @RequestParam LocalDate contract_start, @RequestParam LocalDate contract_end, @RequestParam double price){
         System.out.println("Received request: customer_id=" + customer_id + ", car_id=" + car_id + ", contract_start=" + contract_start + ", contract_end=" + contract_end + ", price=" + price);
-
-
         List<Contract> contracts = contractService.getlist();
 
         Contract contract1 = new Contract();
 
-        boolean isvalid = false;
+        Period period = Period.between(contract_start, contract_end);
 
+        int month = period.getMonths();
+        int days = period.getDays();
+
+
+        //kan testes mere, 
+        boolean isvalid = false;
         try{
             for(int i = 0; i < contracts.size(); i++) {
                 contract1 = contracts.get(i);
-                if (contract1.getCustomer_id() == customer_id && contract1.getCar_id() == car_id) {
+                if (contract1.getCustomer_id() == customer_id && contract1.getCar_id() == car_id && (contract1.getContract_start().isBefore(contract_end) && contract1.getContract_end().isAfter(contract_start)) ||
+                        (contract1.getContract_start().equals(contract_start) && contract1.getContract_end().equals(contract_end))) {
+
                     isvalid = true;
                     break;
                 }
             }
             if(isvalid){
-                model.addAttribute("message","Contract exist");
+                model.addAttribute("message","Contract exist/cantbemade");
                 return "home/newcontract";
             }else {
                 model.addAttribute("message", "Contract created successfully");
                 contractService.createContract(customer_id,car_id,contract_start,contract_end,price);
             }
-
-
         }catch (Exception e){
             System.err.println("Error while creating contract: " + e.getMessage());
             model.addAttribute("message", "Error while creating contract: " + e.getMessage());
         }
+        return "home/newcontract";
+    }
 
+    @GetMapping("/showprice")
+    private String Showprice(Model model){
 
+        List<Contract> contracts = contractService.getlist();
+//dato fra price så man vælger en dato til slutdato og får en pris
+        double price = 0;
+        for (int i = 0; i < contracts.size(); i++) {
+             price += contracts.get(i).getPrice();
+        }
+        model.addAttribute("price",price);
 
         return "home/newcontract";
     }
 
+    @GetMapping("/ShowRepport")
+    private String showRepport(Model model,@RequestParam LocalDate start, @RequestParam LocalDate end){
 
+        List<Contract> contracts = contractService.getlist();
+        Contract contract1 = new Contract();
 
+        double price = 0;
+        for(int i = 0; i < contracts.size(); i++) {
+            contract1 = contracts.get(i);
+            if (!contract1.getContract_start().isBefore(start) && !contract1.getContract_end().isAfter(end)) {
+                price += contract1.getPrice();
+            }
+        }
+        model.addAttribute("timeprice","this period you got " + start + " to " + end + " = "+price +"kr.");
+        return "home/ShowRepport";
+    }
 
+    @PostMapping("/validate")
+    private String validate(Model model,@RequestParam String password){
+        if(password.equals("123")){
+            return "home/Menu";
+        }else{
+            return "home/index";
+        }
 
+    }
+
+    @GetMapping("/ShowContracts")
+    private String showContracts(Model model){
+        model.addAttribute("ContractList",contractService.getlist());
+        return "home/Contracts";
+    }
+
+    @GetMapping("/Editcontract")
+    private String editcontract(Model model, @RequestParam int contract_id){
+        model.addAttribute("contractedit",contractService.getContract(contract_id));
+        return "home/EditContract";
+    }
+
+    @PostMapping("/updateContract")
+    private String updatecontract(@RequestParam int contract_id,@RequestParam int custumer_id,@RequestParam int car_id,@RequestParam LocalDate contract_start ,@RequestParam LocalDate contract_end , @RequestParam double price){
+        contractService.updateContract(contract_id,custumer_id,car_id,contract_start,contract_end,price);
+        return "redirect:/" + "ShowContracts?";
+    }
 }

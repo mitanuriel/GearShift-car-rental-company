@@ -26,4 +26,23 @@ public class ContractRepository {
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return jdbcTemplate.query(query,rowMapper);
     }
+
+    public Contract getContract(int contractId) {
+        String query = "SELECT * FROM contract WHERE contract_id = ?;";
+        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
+        return jdbcTemplate.queryForObject(query, rowMapper, contractId);
+    }
+
+
+
+    public void updateContract(int contract_id,int custumerId, int carId, LocalDate contractStart, LocalDate contractEnd, double price) {
+        String query = "UPDATE contract "
+                + "SET customer_id = ?, "
+                + "car_id = ?, "
+                + "contract_start = ?, "
+                + "contract_end = ?, "
+                + "price = ? "
+                + "WHERE contract_id = ?;";
+        jdbcTemplate.update(query,custumerId,carId,contractStart,contractEnd,price,contract_id);
+    }
 }

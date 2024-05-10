@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<thead>
+<tr>
+    <th>Contract ID</th>
+    <th>Car ID</th>
+    <th>Customer ID</th>
+    <th>Contract Start</th>
+    <th>Contract End</th>
+    <th>Price</th>
+    <th>Actions</th>
+</tr>
+</thead>
+<table>
+    <tr th:each="list : ${ContractList}">
+        <td th:text="${list.contract_id}"></td>
+        <td th:text="${list.car_id}"></td>
+        <td th:text="${list.customer_id}"></td>
+        <td th:text="${list.contract_start}"></td>
+        <td th:text="${list.contract_end}"></td>
+        <td th:text="${list.price}"></td>
+        <td>
+            <form action="/Editcontract" method="GET">
+                <input type="hidden" name="contract_id" th:value="${list.contract_id}">
+                <button type="submit">Edit </button>
+            </form>
+        </td>
+
+        delete
+    </tr>
+
+</table>
+
+<form action="/gotomenu" method="GET">
+    <button type="submit">GO to menu</button>
+
+</form>
+</body>
+</html>
