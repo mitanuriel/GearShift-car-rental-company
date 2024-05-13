@@ -1,10 +1,6 @@
-package com.example.carrental.Controller;
-
-
-import com.example.carrental.Model.Contract;
-import com.example.carrental.Repository.ContractRepository;
-import com.example.carrental.Service.ContractService;
-import jakarta.annotation.PreDestroy;
+package com.example.carrental.controller;
+import com.example.carrental.model.Contract;
+import com.example.carrental.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +15,8 @@ import java.util.List;
 @Controller
 public class ContractController {
     private ContractService contractService;
+
+
 
     @Autowired
     public ContractController(ContractService contractService) {
@@ -43,31 +41,39 @@ public class ContractController {
         int month = period.getMonths();
         int days = period.getDays();
 
+        if(month < 3){
+            model.addAttribute("Error","Lejeperioden must be 3 måneder mindst");
+            return "home/newcontract";
+        }else{
 
-        //kan testes mere, 
-        boolean isvalid = false;
-        try{
-            for(int i = 0; i < contracts.size(); i++) {
-                contract1 = contracts.get(i);
-                if (contract1.getCustomer_id() == customer_id && contract1.getCar_id() == car_id && (contract1.getContract_start().isBefore(contract_end) && contract1.getContract_end().isAfter(contract_start)) ||
-                        (contract1.getContract_start().equals(contract_start) && contract1.getContract_end().equals(contract_end))) {
+            boolean isvalid = false;
+            try{
+                for(int i = 0; i < contracts.size(); i++) {
+                    contract1 = contracts.get(i);
+                    if (contract1.getCustomer_id() == customer_id && contract1.getCar_id() == car_id && (contract1.getContract_start().isBefore(contract_end) && contract1.getContract_end().isAfter(contract_start)) ||
+                            (contract1.getContract_start().equals(contract_start) && contract1.getContract_end().equals(contract_end))) {
 
-                    isvalid = true;
-                    break;
+                        isvalid = true;
+                        break;
+                    }
                 }
+                if(isvalid){
+                    model.addAttribute("message","Contract exist/cantbemade");
+                    return "home/newcontract";
+                }else {
+                    model.addAttribute("message", "Contract created successfully");
+                    contractService.createContract(customer_id,car_id,contract_start,contract_end,price);
+                }
+            }catch (Exception e){
+                System.err.println("Error while creating contract: " + e.getMessage());
+                model.addAttribute("message", "Error while creating contract: " + e.getMessage());
             }
-            if(isvalid){
-                model.addAttribute("message","Contract exist/cantbemade");
-                return "home/newcontract";
-            }else {
-                model.addAttribute("message", "Contract created successfully");
-                contractService.createContract(customer_id,car_id,contract_start,contract_end,price);
-            }
-        }catch (Exception e){
-            System.err.println("Error while creating contract: " + e.getMessage());
-            model.addAttribute("message", "Error while creating contract: " + e.getMessage());
+            return "home/newcontract";
+
         }
-        return "home/newcontract";
+
+        //kan testes mere,
+
     }
 
     @GetMapping("/showprice")

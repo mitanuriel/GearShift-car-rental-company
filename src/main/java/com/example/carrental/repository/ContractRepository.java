@@ -1,6 +1,6 @@
-package com.example.carrental.Repository;
+package com.example.carrental.repository;
 
-import com.example.carrental.Model.Contract;
+import com.example.carrental.model.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

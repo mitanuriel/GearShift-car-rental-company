@@ -1,7 +1,7 @@
-package com.example.carrental.Service;
+package com.example.carrental.service;
 
-import com.example.carrental.Model.Contract;
-import com.example.carrental.Repository.ContractRepository;
+import com.example.carrental.model.Contract;
+import com.example.carrental.repository.ContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
