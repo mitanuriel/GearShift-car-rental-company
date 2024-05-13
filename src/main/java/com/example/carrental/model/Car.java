@@ -95,4 +95,6 @@ public class Car {
     public void setImage(byte[] image) {
         this.image = image;
     }
+
+
 }

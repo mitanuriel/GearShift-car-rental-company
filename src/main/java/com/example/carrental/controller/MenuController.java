@@ -25,6 +25,8 @@ public class MenuController {
     public String gotoshowrepport(){
         return "home/ShowRepport";
     }
-
-
+    @GetMapping("/gotoshowcontracts")
+    private String gotoshowcontract(){
+        return "redirect:/ShowContracts?";
+    }
 }

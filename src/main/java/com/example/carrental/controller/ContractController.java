@@ -1,5 +1,7 @@
 package com.example.carrental.controller;
+import com.example.carrental.model.Car;
 import com.example.carrental.model.Contract;
+import com.example.carrental.service.CarService;
 import com.example.carrental.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +17,14 @@ import java.util.List;
 @Controller
 public class ContractController {
     private ContractService contractService;
+    private CarService carService;
 
 
 
     @Autowired
-    public ContractController(ContractService contractService) {
+    public ContractController(ContractService contractService, CarService carService) {
         this.contractService = contractService;
+        this.carService = carService;
     }
 
 
@@ -30,11 +34,12 @@ public class ContractController {
     }
 
     @PostMapping("/newcontract1")
-    private String addContract(Model model,@RequestParam int customer_id, @RequestParam int car_id, @RequestParam LocalDate contract_start, @RequestParam LocalDate contract_end, @RequestParam double price){
-        System.out.println("Received request: customer_id=" + customer_id + ", car_id=" + car_id + ", contract_start=" + contract_start + ", contract_end=" + contract_end + ", price=" + price);
+    private String addContract(Model model,@RequestParam int customer_id, @RequestParam int car_id, @RequestParam LocalDate contract_start, @RequestParam LocalDate contract_end){
         List<Contract> contracts = contractService.getlist();
 
+        Car car1 = carService.getCar(car_id);
         Contract contract1 = new Contract();
+
 
         Period period = Period.between(contract_start, contract_end);
 
@@ -45,7 +50,14 @@ public class ContractController {
             model.addAttribute("Error","Lejeperioden must be 3 måneder mindst");
             return "home/newcontract";
         }else{
-
+            // Calculate leasing price
+            double monthlyPrice = car1.getMonthly_price();
+            double totalPrice = monthlyPrice * month;
+            if (days > 0) {
+                double dailyPrice = (double) monthlyPrice / 30;
+                double extraDaysPrice = dailyPrice * days;
+                totalPrice += Math.round(extraDaysPrice);
+            }
             boolean isvalid = false;
             try{
                 for(int i = 0; i < contracts.size(); i++) {
@@ -61,9 +73,11 @@ public class ContractController {
                     model.addAttribute("message","Contract exist/cantbemade");
                     return "home/newcontract";
                 }else {
-                    model.addAttribute("message", "Contract created successfully");
-                    contractService.createContract(customer_id,car_id,contract_start,contract_end,price);
+                    model.addAttribute("message", "Contract created successfully" + "the tolal price will be = " + totalPrice);
+                    model.addAttribute("totalprice",totalPrice);
+                    contractService.createContract(customer_id,car_id,contract_start,contract_end,totalPrice);
                 }
+                System.out.println("Received request: customer_id=" + customer_id + ", car_id=" + car_id + ", contract_start=" + contract_start + ", contract_end=" + contract_end + ", price=" + totalPrice);
             }catch (Exception e){
                 System.err.println("Error while creating contract: " + e.getMessage());
                 model.addAttribute("message", "Error while creating contract: " + e.getMessage());
