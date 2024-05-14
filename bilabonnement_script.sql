@@ -11,10 +11,18 @@ CREATE TABLE car (
     brand VARCHAR(255),
     chassis_number VARCHAR(255),
     co2_emissions INT,
-    equipment_level VARCHAR(255),
     image MEDIUMBLOB,
+    equipment_id INT,
     state ENUM('In storage', 'Being used', 'Under inspection'),
-    PRIMARY KEY (car_id)
+    PRIMARY KEY (car_id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id)
+);
+
+CREATE TABLE equipment (
+    equipment_id INT AUTO_INCREMENT,
+    name VARCHAR(255),
+    amount INT,
+    PRIMARY KEY (equipment_id)
 );
 
 CREATE TABLE customer (
