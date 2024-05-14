@@ -12,10 +12,15 @@ CREATE TABLE car (
     license_plate VARCHAR(255),
     chassis_number VARCHAR(255),
     co2_emissions INT,
-    image MEDIUMBLOB,
-    equipment_id INT,
     state ENUM('In storage', 'Being used', 'Under inspection'),
-    PRIMARY KEY (car_id),
+    PRIMARY KEY (car_id)
+);
+
+CREATE TABLE car_image (
+	car_image_id INT AUTO INCREMENT,
+    image MEDIUMBLOB,
+    PRIMARY KEY (car_image_id),
+    FOREIGN KEY (car_id) REFERENCES car(car_id)
 );
 
 CREATE TABLE equipment (
