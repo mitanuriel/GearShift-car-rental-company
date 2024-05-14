@@ -20,6 +20,7 @@ CREATE TABLE car (
 CREATE TABLE equipment (
     equipment_id INT AUTO_INCREMENT,
     name VARCHAR(255),
+    car_id INT,
     PRIMARY KEY (equipment_id),
     FOREIGN KEY (car_id) REFERENCES car(car_id)
 );
