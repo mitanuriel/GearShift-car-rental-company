@@ -19,6 +19,7 @@ CREATE TABLE car (
 CREATE TABLE car_image (
     car_image_id INT AUTO INCREMENT,
     image MEDIUMBLOB,
+    priority INT,
     PRIMARY KEY (car_image_id),
     FOREIGN KEY (car_id) REFERENCES car(car_id)
 );
