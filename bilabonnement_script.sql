@@ -17,7 +17,7 @@ CREATE TABLE car (
 );
 
 CREATE TABLE car_image (
-    car_image_id INT AUTO INCREMENT,
+    car_image_id INT AUTO_INCREMENT,
     image MEDIUMBLOB,
     priority INT,
     PRIMARY KEY (car_image_id),
