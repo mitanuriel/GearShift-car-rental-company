@@ -15,15 +15,21 @@ CREATE TABLE car (
     equipment_id INT,
     state ENUM('In storage', 'Being used', 'Under inspection'),
     PRIMARY KEY (car_id),
-    FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id)
 );
 
 CREATE TABLE equipment (
     equipment_id INT AUTO_INCREMENT,
     name VARCHAR(255),
-    amount INT,
-    PRIMARY KEY (equipment_id)
+    PRIMARY KEY (equipment_id),
+    FOREIGN KEY (car_id) REFERENCES car(car_id)
 );
+
+CREATE TABLE equipment_amount (
+    equipment_amount_id INT AUTO_INCREMENT,
+    amount INT,
+    equipment_id INT,
+    PRIMARY KEY (equipment_amount_id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id)
 
 CREATE TABLE customer (
     customer_id INT AUTO_INCREMENT,
