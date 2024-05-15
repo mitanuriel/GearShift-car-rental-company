@@ -1,8 +1,10 @@
 package com.example.carrental.controller;
 import com.example.carrental.model.Car;
 import com.example.carrental.model.Contract;
+import com.example.carrental.model.Customer;
 import com.example.carrental.service.CarService;
 import com.example.carrental.service.ContractService;
+import com.example.carrental.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import java.util.List;
 public class ContractController {
     private ContractService contractService;
     private CarService carService;
+    private CustomerService customerService;
 
 
 
@@ -34,24 +37,32 @@ public class ContractController {
     }
 
     @PostMapping("/newcontract1")
-    private String addContract(Model model,@RequestParam int customer_id, @RequestParam int car_id, @RequestParam LocalDate contract_start, @RequestParam LocalDate contract_end){
+    private String addContract(Model model,@RequestParam String phonenumber, @RequestParam String chassisnumber, @RequestParam LocalDate contract_start, @RequestParam LocalDate contract_end){
         List<Contract> contracts = contractService.getlist();
 
-        Car car1 = carService.getCar(car_id);
         Contract contract1 = new Contract();
 
+        List<Customer> customer = customerService.getCustomer(phonenumber);
+        List<Car> car1 = carService.getCar1(chassisnumber);
+
+
+        int carid = car1.get(0).getCar_id();
+        int cusomerid = customer.get(0).getCustomer_id();
+
+        System.out.println("carid :" + carid + "  cusomerid : " + cusomerid);
 
         Period period = Period.between(contract_start, contract_end);
 
         int month = period.getMonths();
         int days = period.getDays();
 
+
         if(month < 3){
             model.addAttribute("Error","Lejeperioden must be 3 måneder mindst");
             return "home/newcontract";
         }else{
             // Calculate leasing price
-            double monthlyPrice = car1.getMonthly_price();
+            double monthlyPrice = car1.get(0).getMonthly_price();
             double totalPrice = monthlyPrice * month;
             if (days > 0) {
                 double dailyPrice = (double) monthlyPrice / 30;
@@ -62,7 +73,7 @@ public class ContractController {
             try{
                 for(int i = 0; i < contracts.size(); i++) {
                     contract1 = contracts.get(i);
-                    if (contract1.getCustomer_id() == customer_id && contract1.getCar_id() == car_id && (contract1.getContract_start().isBefore(contract_end) && contract1.getContract_end().isAfter(contract_start)) ||
+                    if (contract1.getCustomer_id() == cusomerid && contract1.getCar_id() == carid && (contract1.getContract_start().isBefore(contract_end) && contract1.getContract_end().isAfter(contract_start)) ||
                             (contract1.getContract_start().equals(contract_start) && contract1.getContract_end().equals(contract_end))) {
 
                         isvalid = true;
@@ -75,9 +86,9 @@ public class ContractController {
                 }else {
                     model.addAttribute("message", "Contract created successfully" + "the tolal price will be = " + totalPrice);
                     model.addAttribute("totalprice",totalPrice);
-                    contractService.createContract(customer_id,car_id,contract_start,contract_end,totalPrice);
+                    contractService.createContract(cusomerid,carid,contract_start,contract_end,totalPrice);
                 }
-                System.out.println("Received request: customer_id=" + customer_id + ", car_id=" + car_id + ", contract_start=" + contract_start + ", contract_end=" + contract_end + ", price=" + totalPrice);
+                System.out.println("Received request: customer_id=" + customer + ", car_id=" + carid + ", contract_start=" + contract_start + ", contract_end=" + contract_end + ", price=" + totalPrice);
             }catch (Exception e){
                 System.err.println("Error while creating contract: " + e.getMessage());
                 model.addAttribute("message", "Error while creating contract: " + e.getMessage());

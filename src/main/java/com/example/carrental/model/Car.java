@@ -7,13 +7,23 @@ public class Car {
     private String model;
     private double monthly_price;
     private String brand;
-    private double chassis_number;
+
+    private String license_plate;
+    private String chassis_number;
     private String co2_emissions;
     private String equipment_level;
     private String state;
     private byte[] image;
 
     public Car() {
+    }
+
+    public String getLicense_plate() {
+        return license_plate;
+    }
+
+    public void setLicense_plate(String license_plate) {
+        this.license_plate = license_plate;
     }
 
     public String encodeImageToBase64String() {
@@ -56,11 +66,11 @@ public class Car {
         this.brand = brand;
     }
 
-    public double getChassis_number() {
+    public String getChassis_number() {
         return chassis_number;
     }
 
-    public void setChassis_number(double chassis_number) {
+    public void setChassis_number(String chassis_number) {
         this.chassis_number = chassis_number;
     }
 

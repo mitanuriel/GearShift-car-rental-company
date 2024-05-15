@@ -38,4 +38,9 @@ public class CarService {
     public void update(Car car) {
         carRepository.update(car);
     }
+
+
+    public List<Car> getCar1(String chassisnumber) {
+        return carRepository.getCarid(chassisnumber);
+    }
 }

@@ -49,4 +49,11 @@ public class CarRepository {
                 + "WHERE car_id = ?;";
         jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getChassis_number(), car.getCo2_emissions(), car.getEquipment_level(), car.getState(), car.getImage(), car.getCar_id());
     }
+
+    public List<Car> getCarid(String chassisnumber) {
+        String query = "select * FROM car WHERE chassis_number = ?;";
+        BeanPropertyRowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return jdbcTemplate.query(query, rowMapper, chassisnumber);
+    }
+
 }
