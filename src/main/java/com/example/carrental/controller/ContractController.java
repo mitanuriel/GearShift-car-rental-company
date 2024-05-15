@@ -25,9 +25,10 @@ public class ContractController {
 
 
     @Autowired
-    public ContractController(ContractService contractService, CarService carService) {
+    public ContractController(ContractService contractService, CarService carService, CustomerService customerService) {
         this.contractService = contractService;
         this.carService = carService;
+        this.customerService = customerService;
     }
 
 
