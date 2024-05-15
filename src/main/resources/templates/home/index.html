@@ -1,15 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Car Rental Front Page</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css" media="screen, projection"/>
 </head>
 <body>
 
-    <form action="/validate" method="post">
-        <input type="text" name="password" value="All">
-        <button type="submit">  login </button>
-    </form>
+
+    <header>
+        <div class="header">
+
+            <h1 class="title">GearShift</h1>
+        </div>
+    </header>
+
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="column-left">
+                <h1> Accelerate your journey</h1>
+                <p> Rent cars for your freedom of movement.</p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <form class="login" action="/validate" method="post">
+                    <input class="input-login" type="text" name="password">
+                    <button class="button" type="submit"> login</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
 
 </body>
 </html>
