@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Delete Contract</h1>
+<table>
+    <tr>
+        <td>Contract ID:</td>
+        <td th:text="${contract.contract_id}"></td>
+    </tr>
+    <tr>
+        <td>Customer ID:</td>
+        <td th:text="${contract.customer_id}"></td>
+    </tr>
+    <tr>
+        <td>Car ID:</td>
+        <td th:text="${contract.car_id}"></td>
+    </tr>
+</table>
+
+<form action="/delete" method="post">
+    <input type="hidden" name="contract_id" th:value="${contractid}">
+    <button type="submit" class="delete_button"> Delete</button>
+</form>
+
+<form action="/gotoshowcontracts">
+    <button type="submit"> cancel</button>
+</form>
+</body>
+</html>
