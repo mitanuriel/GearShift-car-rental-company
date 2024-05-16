@@ -45,4 +45,11 @@ public class ContractRepository {
                 + "WHERE contract_id = ?;";
         jdbcTemplate.update(query,custumerId,carId,contractStart,contractEnd,price,contract_id);
     }
+
+    public void deletecontract(int contractId) {
+        String query = "DELETE FROM damages WHERE contract_id = ?";
+        jdbcTemplate.update(query, contractId);
+        query = "DELETE FROM contract WHERE contract_id = ?";
+        jdbcTemplate.update(query, contractId);
+    }
 }

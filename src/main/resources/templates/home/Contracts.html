@@ -36,14 +36,18 @@
             </form>
         </td>
 
-        delete
+        <td>
+            <form action="/comfirmDelete" method="GET">
+                <input type="hidden" name="contract_id" th:value="${list.contract_id}">
+                <button type="submit"> Delete </button>
+            </form>
+        </td>
     </tr>
 
 </table>
 
 <form action="/gotomenu" method="GET">
     <button type="submit">GO to menu</button>
-
 </form>
 </body>
 </html>

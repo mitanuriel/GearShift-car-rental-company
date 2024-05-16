@@ -37,4 +37,8 @@ public class ContractService {
     public void updateContract(int contract_id,int custumerId, int carId, LocalDate contractStart, LocalDate contractEnd, double price) {
         contractRepository.updateContract(contract_id,custumerId,carId,contractStart,contractEnd,price);
     }
+
+    public void delete(int contractId) {
+        contractRepository.deletecontract(contractId);
+    }
 }

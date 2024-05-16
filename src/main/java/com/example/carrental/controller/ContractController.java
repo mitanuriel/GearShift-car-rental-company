@@ -44,7 +44,15 @@ public class ContractController {
         Contract contract1 = new Contract();
 
         List<Customer> customer = customerService.getCustomer(phonenumber);
+        if (customer.isEmpty()) {
+            model.addAttribute("Error", "Customer with the provided phone number does not exist.");
+            return "home/newcontract";
+        }
         List<Car> car1 = carService.getCar1(chassisnumber);
+        if (car1.isEmpty()) {
+            model.addAttribute("Error", "Car with the provided chassis number does not exist.");
+            return "home/newcontract";
+        }
 
 
         int carid = car1.get(0).getCar_id();
@@ -70,6 +78,7 @@ public class ContractController {
                 double extraDaysPrice = dailyPrice * days;
                 totalPrice += Math.round(extraDaysPrice);
             }
+
             boolean isvalid = false;
             try{
                 for(int i = 0; i < contracts.size(); i++) {
@@ -160,4 +169,18 @@ public class ContractController {
         contractService.updateContract(contract_id,custumer_id,car_id,contract_start,contract_end,price);
         return "redirect:/" + "ShowContracts?";
     }
+
+    @GetMapping("/comfirmDelete")
+    private String comfirmDelete(Model model,@RequestParam int contract_id){
+        model.addAttribute("contractid",contract_id);
+        model.addAttribute(contractService.getContract(contract_id));
+        return "home/comfirmdelete";
+    }
+    @PostMapping("/delete")
+    private String delete(@RequestParam int contract_id){
+        contractService.delete(contract_id);
+        return "redirect:/" + "ShowContracts?";
+    }
+
+
 }
