@@ -5,10 +5,22 @@
 </head>
 <body>
 
-    <form action="/newCar" method="post">
-        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-        <input type="submit" value="Add new car">
-    </form>
+    <table>
+        <tr>
+            <td>
+                <form action="/validate" method="post">
+                    <input type="hidden" name="password" value="123">
+                    <input type="submit" value="Go back">
+                </form>
+            </td>
+            <td>
+                <form action="/newCar" method="post">
+                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                    <input type="submit" value="Add new car">
+                </form>
+            </td>
+        </tr>
+    </table>    
 
     <form action="/showCars" method="get">
         <select name="stateFilter">
