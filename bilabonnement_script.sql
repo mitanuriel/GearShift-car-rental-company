@@ -20,7 +20,6 @@ CREATE TABLE car (
 CREATE TABLE car_image (
     car_image_id INT AUTO_INCREMENT,
     image MEDIUMBLOB,
-    priority INT,
     car_id INT,
     PRIMARY KEY (car_image_id),
     FOREIGN KEY (car_id) REFERENCES car(car_id)
@@ -28,8 +27,7 @@ CREATE TABLE car_image (
 
 CREATE TABLE equipment (
     equipment_id INT AUTO_INCREMENT,
-    name VARCHAR(255),
-    amount INT,
+    description VARCHAR(255),
     car_id INT,
     PRIMARY KEY (equipment_id),
     FOREIGN KEY (car_id) REFERENCES car(car_id)

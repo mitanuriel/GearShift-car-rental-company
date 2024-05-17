@@ -111,7 +111,7 @@ header {
 }
 body {
     font-family: monospace;
-    background-image: url('view-3d-car.jpg');
+    background-image: url('images/view-3d-car.jpg');
     background-attachment: fixed;
     background-size: cover;
 }
@@ -127,5 +127,117 @@ body {
     border-radius: 30px;
 }
 
+/* menu
+ */
+
+.menu-title {
+    letter-spacing: 20px;
+}
+
+/* contracts
+ */
+
+.table-section {
+    margin: 2rem auto;
+    max-width: 800px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+th, td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    background-color: #fdcc04;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    color: #fdcc04;
+    background: black;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.button.delete {
+    background: #ff6666;
+    color: white;
+}
+
+.button:hover {
+    background: #fdcc04;
+    color: black;
+}
+
+.title {
+    color: #fdcc04;
+    border: none;
+    border-radius: 30px;
+}
+
+.body-contracts {
+    font-family: monospace;
+    background: radial-gradient(#FFEB3B, transparent);
+
+}
+
+.title-contracts {
+    color: #000000;
+    border: none;
+    border-radius: 30px;
+}
+
+/*new contract
+ */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+.contract-form {
+    width: 80%;
+    max-width: 500px;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.button-createcontract {
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    border: none;
+    color: #fdcc04;
+    background: black;
+    cursor: pointer;
+    border-radius: 50px;
+}
 
 
