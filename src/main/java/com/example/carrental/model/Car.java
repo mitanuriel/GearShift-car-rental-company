@@ -7,25 +7,15 @@ public class Car {
     private String model;
     private double monthly_price;
     private String brand;
-
     private String license_plate;
     private String chassis_number;
     private String co2_emissions;
-    private String equipment_level;
-    private String state;
     private byte[] image;
+    private String state;
 
     public Car() {
     }
-
-    public String getLicense_plate() {
-        return license_plate;
-    }
-
-    public void setLicense_plate(String license_plate) {
-        this.license_plate = license_plate;
-    }
-
+    
     public String encodeImageToBase64String() {
         return Base64.getEncoder().encodeToString(image);
     }
@@ -66,6 +56,14 @@ public class Car {
         this.brand = brand;
     }
 
+    public String getLicense_plate() {
+        return license_plate;
+    }
+
+    public void setLicense_plate(String license_plate) {
+        this.license_plate = license_plate;
+    }
+
     public String getChassis_number() {
         return chassis_number;
     }
@@ -82,13 +80,13 @@ public class Car {
         this.co2_emissions = co2_emissions;
     }
 
-    public String getEquipment_level() {
-        return equipment_level;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setEquipment_level(String equipment_level) {
-        this.equipment_level = equipment_level;
-    }
+    public void setImage(byte[] image) {
+        this.image = image;
+    }    
 
     public String getState() {
         return state;
@@ -97,14 +95,4 @@ public class Car {
     public void setState(String state) {
         this.state = state;
     }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-
 }
