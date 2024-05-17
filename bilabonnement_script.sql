@@ -12,6 +12,7 @@ CREATE TABLE car (
     license_plate VARCHAR(255),
     chassis_number VARCHAR(255),
     co2_emissions INT,
+    image MEDIUMBLOB,
     state ENUM('In storage', 'Being used', 'Under inspection'),
     PRIMARY KEY (car_id)
 );
