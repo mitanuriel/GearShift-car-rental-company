@@ -5,10 +5,22 @@
 </head>
 <body>
 
-    <form action="/newCar" method="post">
-        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-        <input type="submit" value="Add new car">
-    </form>
+    <table>
+        <tr>
+            <td>
+                <form action="/validate" method="post">
+                    <input type="hidden" name="password" value="123">
+                    <input type="submit" value="Go back">
+                </form>
+            </td>
+            <td>
+                <form action="/newCar" method="post">
+                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                    <input type="submit" value="Add new car">
+                </form>
+            </td>
+        </tr>
+    </table>    
 
     <form action="/showCars" method="get">
         <select name="stateFilter">
@@ -28,9 +40,9 @@
         <tr><td th:text="${car.model}"></td></tr>
         <tr><td th:text="${car.monthly_price}"></td></tr>
         <tr><td th:text="${car.brand}"></td></tr>
+        <tr><td th:text="${car.license_plate}"></td></tr>
         <tr><td th:text="${car.chassis_number}"></td></tr>
         <tr><td th:text="${car.co2_emissions}"></td></tr>
-        <tr><td th:text="${car.equipment_level}"></td></tr>
         <tr><td th:text="${car.state}"></td></tr>
         <tr>    
             <td>

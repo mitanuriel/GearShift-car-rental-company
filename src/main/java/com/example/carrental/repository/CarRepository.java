@@ -33,9 +33,9 @@ public class CarRepository {
     }
 
     public void insert(Car car) {
-        String query = "INSERT INTO car(model, monthly_price, brand, chassis_number, co2_emissions, equipment_level, state, image) "
+        String query = "INSERT INTO car(model, monthly_price, brand, license_plate, chassis_number, co2_emissions, image, state) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-        jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getChassis_number(), car.getCo2_emissions(), car.getEquipment_level(), car.getState(), car.getImage());
+        jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getLicense_plate(), car.getChassis_number(), car.getCo2_emissions(), car.getImage(), car.getState());
     }
 
     public void delete(int car_id) {
@@ -45,9 +45,9 @@ public class CarRepository {
 
     public void update(Car car) {
         String query = "UPDATE car "
-                + "SET model = ?, monthly_price = ?, brand = ?, chassis_number = ?, co2_emissions = ?, equipment_level = ?, state = ?, image = ? "
+                + "SET model = ?, monthly_price = ?, brand = ?, license_plate = ?, chassis_number = ?, co2_emissions = ?, image = ?, state = ? "
                 + "WHERE car_id = ?;";
-        jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getChassis_number(), car.getCo2_emissions(), car.getEquipment_level(), car.getState(), car.getImage(), car.getCar_id());
+        jdbcTemplate.update(query, car.getModel(), car.getMonthly_price(), car.getBrand(), car.getLicense_plate(), car.getChassis_number(), car.getCo2_emissions(), car.getImage(), car.getState(), car.getCar_id());
     }
 
     public List<Car> getCarid(String chassisnumber) {
