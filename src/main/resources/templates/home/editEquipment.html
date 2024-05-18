@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit equipment</title>
+</head>
+<body>
+
+    <table th:if="${equipmentList != null}">
+        <tr th:each="equipment : ${equipmentList}">
+            <td th:text="${equipment.description}"></td>
+            <td>
+                <form action="/deleteEquipment" method="post">
+                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                    <input type="hidden" name="equipment_id" th:value="${equipment.equipment_id}">
+                    <input type="hidden" name="car_id" th:value="${equipment.car_id}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <form action="/insertEquipment" method="post" th:object="${newEquipment}">
+        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+        <input type="hidden" th:field="*{equipment_id}">
+        <input type="text" th:field="*{description}">
+        <input type="hidden" th:field="*{car_id}">
+        <input type="submit" value="Save new equipment">
+    </form>
+
+    <form action="/carDetails" method="get">
+        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+        <input type="hidden" name="car_id" th:value="${car_id}">
+        <input type="submit" value="Go back">
+    </form>
+
+
+</body>
+</html>

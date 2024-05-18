@@ -8,15 +8,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.carrental.service.CarImageService;
 import com.example.carrental.service.CarService;
+import com.example.carrental.service.EquipmentService;
 import com.example.carrental.model.Car;
 
 @Controller
 public class CarController {
     private CarService carService;
+    private CarImageService carImageService;
+    private EquipmentService equipmentService;
 
-    public CarController(CarService carService) {
+    public CarController(CarService carService, CarImageService carImageService, EquipmentService equipmentService) {
         this.carService = carService;
+        this.carImageService = carImageService;
+        this.equipmentService = equipmentService;
     }
 
     @GetMapping("/showCars")
@@ -101,6 +108,8 @@ public class CarController {
     @GetMapping("/carDetails")
     public String viewProductDetails(Model model, @RequestParam int car_id, @RequestParam String stateFilter) {
         model.addAttribute("car", carService.getCar(car_id));
+        model.addAttribute("carImages", carImageService.getAllImages(car_id));
+        model.addAttribute("equipmentList", equipmentService.getAllEquipment(car_id));
         model.addAttribute("stateFilter", stateFilter);
         return "home/carDetails";
     }
