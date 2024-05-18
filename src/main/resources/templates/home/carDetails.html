@@ -1,96 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title th:text="${car.model}"></title>
+    <title th:text="${car.model}">Car Details | GearShift</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body>
+<body class="body-car-details">
 
-    <table>
-        <tr th:if="${car.image != null}">
-            <td><img th:src="@{'data:image/*;base64,' + ${car.encodeImageToBase64String()}}" width="200"></td>
-            <td>
-                <form action="/deleteImage" method="post">
-                    <input type="hidden" name="car_id" th:value="${car.car_id}">
-                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-                    <input type="submit" value="Delete image">
-                </form>
-            </td>
-        </tr>
-        <tr th:if="${car.image == null}">[No image]</tr>
-        <tr><td th:text="${car.model}"></td></tr>
-        <tr><td th:text="${car.monthly_price}"></td></tr>
-        <tr><td th:text="${car.brand}"></td></tr>
-        <tr><td th:text="${car.chassis_number}"></td></tr>
-        <tr><td th:text="${car.co2_emissions}"></td></tr>
-        <tr><td th:text="${car.state}"></td></tr>
-    </table>
+<header>
+    <div class="header">
+        <h1 class="title">GearShift</h1>
+    </div>
+</header>
 
-    <table>
-        <tr>
-            <td>
-                <form action="/editCar" method="post">
-                    <input type="hidden" name="car_id" th:value="${car.car_id}">
-                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-                    <input type="submit" value="Edit this car">
-                </form>
-            </td>
-            <td>
-                <form action="/deleteCar" method="post">
-                    <input type="hidden" name="car_id" th:value="${car.car_id}">
-                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-                    <input type="submit" value="Delete this car">
-                </form>
-            </td>
-        </tr>
-    </table>
+<main class="main-content">
+    <section class="car-details">
+        <table class="car-details-table">
+            <tr th:if="${car.image != null}">
+                <td>
+                    <img th:src="@{'data:image/*;base64,' + ${car.encodeImageToBase64String()}}" width="200">
+                </td>
+                <td>
+                    <form action="/deleteImage" method="post">
+                        <input type="hidden" name="car_id" th:value="${car.car_id}">
+                        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                        <input type="submit" class="button" value="Delete image">
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${car.image == null}">[No image]</tr>
+            <tr><td>Model:</td><td th:text="${car.model}"></td></tr>
+            <tr><td>Monthly Price:</td><td th:text="${car.monthly_price}"></td></tr>
+            <tr><td>Brand:</td><td th:text="${car.brand}"></td></tr>
+            <tr><td>Chassis Number:</td><td th:text="${car.chassis_number}"></td></tr>
+            <tr><td>CO2 Emissions:</td><td th:text="${car.co2_emissions}"></td></tr>
+            <tr><td>State:</td><td th:text="${car.state}"></td></tr>
+        </table>
+    </section>
 
-    <table>
-        <tr>
-            <td>
-                <form action="/showCars" method="get">
-                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-                    <input type="submit" value="Go back">
-                </form>
-            </td>
-        </tr>
-    </table>
+    <section class="car-actions">
+        <table class="car-actions-table">
+            <tr>
+                <td>
+                    <form action="/editCar" method="post">
+                        <input type="hidden" name="car_id" th:value="${car.car_id}">
+                        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                        <input type="submit" class="button" value="Edit this car">
+                    </form>
+                </td>
+                <td>
+                    <form action="/deleteCar" method="post">
+                        <input type="hidden" name="car_id" th:value="${car.car_id}">
+                        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                        <input type="submit" class="button" value="Delete this car">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </section>
 
-    <table th:if="${carImages != null}">
-        <tr th:each="carImage : ${carImages}">
-            <td>
-                <img th:src="@{'data:image/*;base64,' + ${carImage.encodeImageToBase64String()}}" width="200">
-            </td>
-            <td>    
-                <form action="/deleteAdditionalImage" method="post">
-                    <input type="hidden" name="car_id" th:value="${car.car_id}">
-                    <input type="hidden" name="car_image_id" th:value="${carImage.car_image_id}">
-                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-                    <input type="submit" value="Delete image">
-                </form>
-            </td>
-        </tr>
-    </table>
+    <section class="back-action">
+        <form action="/showCars" method="get">
+            <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+            <input type="submit" class="button" value="Go back">
+        </form>
+    </section>
 
-    <form action="/addAdditionalImage" method="post" enctype="multipart/form-data">
-        <input type="submit" value="Add additional image">
-        <input type="file" name="newImage" accept="image/*">
+    <section class="additional-images" th:if="${carImages != null}">
+        <table class="additional-images-table">
+            <tr th:each="carImage : ${carImages}">
+                <td>
+                    <img th:src="@{'data:image/*;base64,' + ${carImage.encodeImageToBase64String()}}" width="200">
+                </td>
+                <td>
+                    <form action="/deleteAdditionalImage" method="post">
+                        <input type="hidden" name="car_id" th:value="${car.car_id}">
+                        <input type="hidden" name="car_image_id" th:value="${carImage.car_image_id}">
+                        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                        <input type="submit" class="button" value="Delete image">
+                    </form>
+                </td>
+            </tr>
+        </table>
 
-        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-        <input type="hidden" name="car_id" th:value="${car.car_id}">
-    </form>
+        <form action="/addAdditionalImage" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+            <input type="hidden" name="car_id" th:value="${car.car_id}">
+            <input type="file" name="newImage" accept="image/*" class="file-input">
+            <input type="submit" class="button" value="Add additional image">
+        </form>
+    </section>
 
-    <table th:if="${equipmentList != null}">
-        <tr th:each="equipment : ${equipmentList}">
-            <td th:text="${equipment.description}"></td>
-        </tr>
-    </table>
+    <section class="equipment-list" th:if="${equipmentList != null}">
+        <table class="equipment-list-table">
+            <tr th:each="equipment : ${equipmentList}">
+                <td th:text="${equipment.description}"></td>
+            </tr>
+        </table>
+    </section>
 
-    <form action="/editEquipment" method="get">
-        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-        <input type="hidden" name="car_id" th:value="${car.car_id}">
-        <input type="submit" value="Edit equipment list">
-    </form>
-
+    <section class="edit-equipment">
+        <form action="/editEquipment" method="get">
+            <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+            <input type="hidden" name="car_id" th:value="${car.car_id}">
+            <input type="submit" class="button" value="Edit equipment list">
+        </form>
+    </section>
+</main>
 
 </body>
 </html>

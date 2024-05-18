@@ -2,27 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Show Rapport | GearShift</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body>
+<body class="body-contracts">
 
+<header>
+    <div class="header">
+        <h1 class="title-contracts">GearShift</h1>
+    </div>
+</header>
+
+<section class="form-container">
+    <h3>Rapport</h3>
+    <br>
 
 <form action="/ShowRepport">
-    <label for="start">Contract Start Date:</label>
-    <input type="date" id="start" name="start" required>
-
-    <label for="end">Contract End Date:</label>
-    <input type="date" id="end" name="end" required>
-
-    <button type="submit">Show price</button>
-
-</form>
-<p th:text="${timeprice}"></p>
-
-<form action="/gotomenu" method="GET">
-    <div>
-        <button type="submit">Go To Menu</button>
+    <div class="form-group">
+        <label for="start">Contract Start Date:</label>
+        <input type="date" id="start" name="start" required>
     </div>
+
+    <div class="form-group">
+        <label for="end">Contract End Date:</label>
+        <input type="date" id="end" name="end" required>
+    </div>
+
+    <button type="submit" class="button-createcontract">Show Price</button>
 </form>
+    <p th:text="${timeprice}"></p>
+
+    <form action="/gotomenu" method="GET">
+        <button type="submit" class="button">Go To Menu</button>
+    </form>
+</section>
+
 </body>
 </html>
