@@ -221,6 +221,14 @@ tr:nth-child(even) {
     align-items: center;
     margin-top: 2rem;
 }
+.form-container form {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+.form-container form .button {
+    width: 100%;
+    max-width: 200px;
+}
 .contract-form {
     width: 80%;
     max-width: 500px;
@@ -241,6 +249,16 @@ tr:nth-child(even) {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.go-back-button {
+    margin-bottom: 1.5rem;
 }
 
 .button-createcontract {
@@ -311,6 +329,7 @@ table {
     max-width: 800px;
     margin: auto;
     border-radius: 10px;
+    background: radial-gradient(#FFEB3B, transparent);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 

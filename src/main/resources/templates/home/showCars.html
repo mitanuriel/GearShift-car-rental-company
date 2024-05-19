@@ -15,15 +15,15 @@
 
 <section class="car-list-section">
     <div class="action-buttons">
-        <form action="/validate" method="post">
-            <input type="hidden" name="password" value="123">
-            <input type="submit" class="button" value="Go back">
-        </form>
         <form action="/newCar" method="post">
             <input type="hidden" name="stateFilter" th:value="${stateFilter}">
             <input type="submit" class="button" value="Add new car">
         </form>
+
     </div>
+
+    <br>
+
 
     <form action="/showCars" method="get">
         <select name="stateFilter">
@@ -61,6 +61,14 @@
             </tr>
         </table>
     </div>
+
+    <div class="go-back-button">
+        <form action="/validate" method="post">
+            <input type="hidden" name="password" value="123">
+            <input type="submit" class="button" value="Go back">
+        </form>
+    </div>
+
 </section>
 
 </body>
