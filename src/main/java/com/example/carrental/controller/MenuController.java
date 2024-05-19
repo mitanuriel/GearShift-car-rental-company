@@ -1,6 +1,10 @@
 package com.example.carrental.controller;
 
+import com.example.carrental.service.CustomerService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -17,7 +21,8 @@ public class MenuController {
         return "home/Menu";
     }
     @GetMapping("/logout")
-    public String logout(){
+    public String logout(HttpSession session){
+        session.removeAttribute("adminlogin");
         return "home/index";
     }
 
@@ -26,7 +31,26 @@ public class MenuController {
         return "home/ShowRepport";
     }
     @GetMapping("/gotoshowcontracts")
-    private String gotoshowcontract(){
+    public String gotoshowcontract(){
         return "redirect:/ShowContracts?";
     }
+
+    @GetMapping("/gotoCostumer")
+    public String gotocostumer(){
+        return "home/Showcostumers";
+    }
+
+    @GetMapping("/gotocreatecostumer")
+    public String gotocreatecostumer(){
+        return "home/newCustomer";
+    }
+    @GetMapping("/gotocustomerlist")
+    public String gotocustomerlist(){
+        return "redirect:/" +"Showcostumerlist?";
+    }
+
+
+
+
+
 }

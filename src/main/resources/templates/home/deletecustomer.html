@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Customer ID:</td>
+        <td th:text="${customer.customer_id}"></td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td th:text="${customer.name}"></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td th:text="${customer.email}"></td>
+    </tr>
+    <tr>
+        <td>Phone Number:</td>
+        <td th:text="${customer.phone_number}"></td>
+    </tr>
+    <tr>
+        <td>Address:</td>
+        <td th:text="${customer.address}"></td>
+    </tr>
+</table>
+<form action="/deletecustomer" method="post">
+    <input type="hidden" name="customerid" th:value="${customer.customer_id}">
+    <button type="submit" class="delete_button"> Delete</button>
+</form>
+
+<form action="/gotocustomerlist">
+    <button type="submit"> cancel</button>
+</form>
+</body>
+</html>

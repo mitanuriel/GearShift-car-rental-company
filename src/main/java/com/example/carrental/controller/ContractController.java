@@ -2,9 +2,12 @@ package com.example.carrental.controller;
 import com.example.carrental.model.Car;
 import com.example.carrental.model.Contract;
 import com.example.carrental.model.Customer;
+import com.example.carrental.model.password;
 import com.example.carrental.service.CarService;
 import com.example.carrental.service.ContractService;
 import com.example.carrental.service.CustomerService;
+import com.example.carrental.service.PasswordService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,13 +26,15 @@ public class ContractController {
     private CarService carService;
     private CustomerService customerService;
 
+    private PasswordService passwordService;
 
 
     @Autowired
-    public ContractController(ContractService contractService, CarService carService, CustomerService customerService) {
+    public ContractController(ContractService contractService, CarService carService, CustomerService customerService,PasswordService passwordService) {
         this.contractService = contractService;
         this.carService = carService;
         this.customerService = customerService;
+        this.passwordService = passwordService;
     }
 
 
@@ -67,7 +73,7 @@ public class ContractController {
 
 
         if(month < 3){
-            model.addAttribute("Error","Lejeperioden must be 3 måneder mindst");
+            model.addAttribute("Error","The lease period must be at least 3 months.");
             return "home/newcontract";
         }else{
             // Calculate leasing price
@@ -126,7 +132,12 @@ public class ContractController {
     }
 
     @GetMapping("/ShowRepport")
-    private String showRepport(Model model,@RequestParam LocalDate start, @RequestParam LocalDate end){
+    private String showRepport(Model model, @RequestParam LocalDate start, @RequestParam LocalDate end,HttpSession httpSession){
+
+        if (!passwordService.checkSession(httpSession)){
+            return "redirect:/";
+        }
+
 
         List<Contract> contracts = contractService.getlist();
         Contract contract1 = new Contract();
@@ -143,8 +154,22 @@ public class ContractController {
     }
 
     @PostMapping("/validate")
-    private String validate(Model model,@RequestParam String password){
-        if(password.equals("123")){
+    private String validate(Model model,@RequestParam String logind,HttpSession session){
+        boolean isvalid = false;
+        List<password> passwords = passwordService.getpasswordlist();
+        password password1 = new password();
+
+        for (int i = 0; i < passwords.size(); i++) {
+            password1 = passwords.get(i);
+            if(password1.getPassword().equals(logind)){
+                isvalid = true;
+                break;
+            }
+
+        }
+        if(isvalid){
+            model.addAttribute("logind");
+            session.setAttribute("adminlogin", password1);
             return "home/Menu";
         }else{
             return "home/index";
@@ -181,6 +206,7 @@ public class ContractController {
         contractService.delete(contract_id);
         return "redirect:/" + "ShowContracts?";
     }
+
 
 
 }
