@@ -179,7 +179,7 @@ public class ContractController {
 
     @GetMapping("/ShowContracts")
     private String showContracts(Model model){
-        model.addAttribute("ContractList",contractService.getlist());
+        model.addAttribute("ContractList",contractService.getlistinfo());
         return "home/Contracts";
     }
 

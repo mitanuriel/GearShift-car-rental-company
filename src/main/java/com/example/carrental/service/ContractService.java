@@ -1,6 +1,7 @@
 package com.example.carrental.service;
 
 import com.example.carrental.model.Contract;
+import com.example.carrental.model.contractlist;
 import com.example.carrental.repository.ContractRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,7 @@ public class ContractService {
     }
 
 
+    public List<contractlist> getlistinfo() {
+        return contractRepository.getlistinfo();
+    }
 }

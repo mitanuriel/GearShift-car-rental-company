@@ -1,6 +1,7 @@
 package com.example.carrental.repository;
 
 import com.example.carrental.model.Contract;
+import com.example.carrental.model.contractlist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,7 +27,11 @@ public class ContractRepository {
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return jdbcTemplate.query(query,rowMapper);
     }
-
+    public List<contractlist> getlistinfo() {
+        String query = "SELECT c.contract_id, cu.phone_number, ca.chassis_number, c.contract_start, c.contract_end, c.price" + " FROM contract c" + " INNER JOIN car ca ON c.car_id = ca.car_id" + " INNER JOIN customer cu ON c.customer_id = cu.customer_id;";
+        RowMapper<contractlist> rowMapper = new BeanPropertyRowMapper<>(contractlist.class);
+        return jdbcTemplate.query(query,rowMapper);
+    }
     public Contract getContract(int contractId) {
         String query = "SELECT * FROM contract WHERE contract_id = ?;";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
