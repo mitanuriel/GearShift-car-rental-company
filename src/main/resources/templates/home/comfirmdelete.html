@@ -2,33 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Delete Contract | GearShift</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body>
+<body class="body-contracts">
 
-<h1>Delete Contract</h1>
-<table>
-    <tr>
-        <td>Contract ID:</td>
-        <td th:text="${contract.contract_id}"></td>
-    </tr>
-    <tr>
-        <td>Customer ID:</td>
-        <td th:text="${contract.customer_id}"></td>
-    </tr>
-    <tr>
-        <td>Car ID:</td>
-        <td th:text="${contract.car_id}"></td>
-    </tr>
-</table>
+<header>
+    <div class="header">
+        <h1 class="title-contracts">GearShift</h1>
+    </div>
+</header>
 
-<form action="/delete" method="post">
-    <input type="hidden" name="contract_id" th:value="${contractid}">
-    <button type="submit" class="delete_button"> Delete</button>
-</form>
+<section class="form-container">
+    <h3>Delete Contract</h3>
+    <table>
+        <tr>
+            <td>Contract ID:</td>
+            <td th:text="${contract.contract_id}"></td>
+        </tr>
+        <tr>
+            <td>Customer ID:</td>
+            <td th:text="${contract.customer_id}"></td>
+        </tr>
+        <tr>
+            <td>Car ID:</td>
+            <td th:text="${contract.car_id}"></td>
+        </tr>
+    </table>
 
-<form action="/gotoshowcontracts">
-    <button type="submit"> cancel</button>
-</form>
+    <form action="/delete" method="post">
+        <input type="hidden" name="contract_id" th:value="${contractid}">
+        <button type="submit" class="button-delete">Delete</button>
+    </form>
+
+    <form action="/gotoshowcontracts" method="GET">
+        <button type="submit" class="button">Cancel</button>
+    </form>
+</section>
+
 </body>
 </html>

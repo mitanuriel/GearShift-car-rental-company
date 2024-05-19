@@ -2,50 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Contract | GearShift</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body>
-<table> <tr>
-    <p></p>
+<body class="body-contracts">
+
+<header>
+    <div class="header">
+        <h1 class="title-contracts">GearShift</h1>
+    </div>
+</header>
+
+<section class="form-container">
+    <h3>Edit Contract</h3>
     <form action="/updateContract" method="POST">
 
         <input type="hidden" name="contract_id" th:value="${contractedit.contract_id}">
 
         <!-- Input fields pre-filled with the contract data -->
-        <label for="customer_id">Customer ID:</label>
-        <input type="text" id="customer_id" name="custumer_id" th:value="${contractedit.customer_id}" required>
-        <br>
-
-        <label for="car_id">Car ID:</label>
-        <input type="text" id="car_id" name="car_id" th:value="${contractedit.car_id}" required>
-        <br>
-
-
-
-        <label for="contract_start">Contract Start:</label>
-        <input type="date" id="contract_start" name="contract_start" th:value="${contractedit.contract_start}" required>
-        <br>
-
-        <label for="contract_end">Contract End:</label>
-        <input type="date" id="contract_end" name="contract_end" th:value="${contractedit.contract_end}" required>
-        <br>
-
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" th:value="${contractedit.price}" step="0.01" required>
-        <br>
-
+        <div class="form-group">
+            <label for="customer_id">Customer ID:</label>
+            <input type="text" id="customer_id" name="custumer_id" th:value="${contractedit.customer_id}" required>
+        </div>
+        <div class="form-group">
+            <label for="car_id">Car ID:</label>
+            <input type="text" id="car_id" name="car_id" th:value="${contractedit.car_id}" required>
+        </div>
+        <div class="form-group">
+            <label for="contract_start">Contract Start:</label>
+            <input type="date" id="contract_start" name="contract_start" th:value="${contractedit.contract_start}" required>
+        </div>
+        <div class="form-group">
+            <label for="contract_end">Contract End:</label>
+            <input type="date" id="contract_end" name="contract_end" th:value="${contractedit.contract_end}" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" th:value="${contractedit.price}" step="0.01" required>
+        </div>
         <!-- Submit and Cancel buttons -->
-        <button type="submit">Update Contract</button>
-
-
+        <button type="submit" class="button">Update Contract</button>
     </form>
 
-    <form action="/gotoshowcontracts">
-        <button type="submit"> cancel</button>
+    <form action="/gotoshowcontracts" method="GET">
+        <button type="submit" class="button">Cancel</button>
     </form>
-</tr>
-</table>
-
+</section>
 
 
 </body>
