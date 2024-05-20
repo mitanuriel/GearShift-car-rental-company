@@ -5,51 +5,57 @@
     <title>Contracts | GearShift</title>
     <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body class="body-contracts">
+<body>
 
 <header>
     <div class="header">
-        <h1 class="title-contracts">GearShift</h1>
+        <h1 class="title">GearShift</h1>
     </div>
 </header>
 
-<section class="table-section">
-    <form action="/gotoContracts" method="GET">
-        <div>
-            <button type="submit" class="button">Create Contract</button>
-        </div>
-    </form>
-
-    <table>
+<section class="add-car-section">
+    <div class="form-actions">
+    <table class="car-form-table">
         <thead>
         <tr>
-            <th>Chassisnumber</th>
-            <th>Phonenumber</th>
-            <th>Contract Start</th>
-            <th>Contract End</th>
-            <th>Price</th>
-            <th>Actions</th>
+            <th><strong>Chassis Number</strong></th>
+            <th><strong>Phone Number</strong></th>
+            <th><strong>Contract Start</strong></th>
+            <th><strong>Contract End</strong></th>
+            <th><strong>Price</strong></th>
+            <th><strong>Actions</strong></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="list : ${ContractList}">
-            <td th:text="${list.chassis_number}"></td>
-            <td th:text="${list.phone_number}"></td>
-            <td th:text="${list.contract_start}"></td>
-            <td th:text="${list.contract_end}"></td>
-            <td th:text="${list.price}"></td>
+            <td><strong th:text="${list.chassis_number}"></strong></td>
+            <td><strong th:text="${list.phone_number}"></strong></td>
+            <td><strong th:text="${list.contract_start}"></strong></td>
+            <td><strong th:text="${list.contract_end}"></strong></td>
+            <td><strong th:text="${list.price}"></strong></td>
             <td>
+            </td>
+
+            <div class="button-container">
+                <form action="/gotoContracts" method="GET">
+                    <button type="submit" class="button">Create Contract</button>
+                </form>
+
                 <form action="/Editcontract" method="GET">
                     <input type="hidden" name="contract_id" th:value="${list.contract_id}">
-                    <button type="submit" class="button">Edit</button>
+                    <button type="submit" class="button">Edit contract</button>
                 </form>
-            </td>
-            <td>
+
+                <form action="/gotomenu" method="GET">
+                    <button type="submit" class="button">Go to Menu</button>
+                </form>
+
                 <form action="/comfirmDelete" method="GET">
                     <input type="hidden" name="contract_id" th:value="${list.contract_id}">
-                    <button type="submit" class="button delete">Delete</button>
+                    <button type="submit" class="button">Delete</button>
                 </form>
-            </td>
+        </div>
+
         </tr>
         </tbody>
     </table>
@@ -62,9 +68,8 @@
     <br>
     <br>
     <br>
-    <form action="/gotomenu" method="GET">
-        <button type="submit" class="button">Go to Menu</button>
-    </form>
+
+        </div>
 </section>
 
 </body>

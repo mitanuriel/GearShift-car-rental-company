@@ -37,7 +37,7 @@ public class MenuController {
 
     @GetMapping("/gotoCostumer")
     public String gotocostumer(){
-        return "home/Showcostumers";
+        return "redirect:/" +"Showcostumerlist?";
     }
 
     @GetMapping("/gotocreatecostumer")

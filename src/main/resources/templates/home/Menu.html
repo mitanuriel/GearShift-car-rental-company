@@ -14,52 +14,56 @@
     </div>
 </header>
 
-<section class="hero">
-    <div class="hero-container">
+<section class="add-car-section">
+    <div class="form-actions">
         <div class="column-left">
             <h1 class="menu-title">Menu</h1>
 
+
+            <div class="button-container-menu">
             <form action="/ShowContracts" method="GET">
                 <div class="menu-item">
                     <h3>Renting Contract</h3>
-                    <br>
                     <button class="button" type="submit">Press here</button>
                 </div>
             </form>
+            <br>
 
             <form action="/gotoshowrepport" method="GET">
                 <div class="menu-item">
                     <h3>Rapport</h3>
-                    <br>
+
                     <button class="button" type="submit">Press here</button>
                 </div>
             </form>
             <br>
-            <br>
+
             <form action="/Showcostumerlist" method="GET">
                 <div class="menu-item">
-                    <h3>GO TO customer</h3>
-                    <br>
+                    <h3>Customer</h3>
                     <button class="button" type="submit">Press here</button>
                 </div>
             </form>
             <br>
-            <br>
-            <br>
+
+
 
             <form action="/showCars" method="get">
                 <input type="hidden" name="stateFilter" value="All">
                 <input class="button" type="submit" value="Show all cars">
             </form>
+            <br>
+            <form action="/logout" method="GET">
+                <div class="menu-item">
+                    <button class="button" type="submit">Log Out</button>
+                </div>
+            </form>
+            </div>
 
         </div>
     </div>
 
-    <form action="/logout" method="GET">
-        <div class="menu-item">
-            <button class="button" type="submit">Log Out</button>
-        </div>
-    </form>
+
 </section>
 
 

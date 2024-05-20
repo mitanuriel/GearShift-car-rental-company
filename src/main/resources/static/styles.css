@@ -138,6 +138,14 @@ body {
     letter-spacing: 20px;
 }
 
+.button-container-menu {
+    display: inline-table;
+    gap: 1rem;
+    background: rgba(253, 204, 4, 0.3);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
 /* contracts
  */
 
@@ -342,9 +350,15 @@ table {
     width: 100%;
     margin-bottom: 1.5rem;
     border-collapse: separate;
-    border-spacing: 0 1rem;
+    border-spacing: revert;
 }
-
+.car-form-table th, .car-form-table td {
+    border: 1px solid black;
+    padding: 8px;
+}
+.car-form-table th {
+    background-color: #fdcc04;
+}
 .car-form-table td {
     padding: 0.5rem;
 }
@@ -359,7 +373,7 @@ table {
     width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #fdcc04;
     border-radius: 5px;
 }
 
