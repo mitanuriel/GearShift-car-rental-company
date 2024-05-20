@@ -26,7 +26,7 @@ public class CustomerController {
     @PostMapping("/addnewCostumer")
     public String insertcustomer(@RequestParam String name, @RequestParam String email, @RequestParam String phone_number, @RequestParam String address){
         customerService.addCustomer(name,email,phone_number,address);
-        return "redirect:/" +"gotoCostumer?";
+        return "redirect:/" +"Showcostumerlist?";
 
     }
 
