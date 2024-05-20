@@ -66,3 +66,5 @@ CREATE TABLE damages (
 CREATE TABLE passwords (
     password varchar(255)
 );
+INSERT INTO passwords (password)
+VALUES (123); 
