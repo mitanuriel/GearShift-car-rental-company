@@ -62,3 +62,7 @@ CREATE TABLE damages (
     PRIMARY KEY (damages_id),
     FOREIGN KEY (contract_id) REFERENCES contract(contract_id)
 );
+
+CREATE TABLE passwords (
+    password varchar(255)
+);
