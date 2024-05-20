@@ -5,11 +5,11 @@
     <title>Add New Car | GearShift</title>
     <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body class="body-add-car">
+<body>
 
 <header>
     <div class="header">
-        <h1 class="title-contracts">GearShift</h1>
+        <h1 class="title">GearShift</h1>
     </div>
 </header>
 
@@ -26,37 +26,37 @@
                 </td>
             </tr>
             <tr>
-                <td>Model</td>
+                <td><strong>Model</strong></td>
                 <td>
                     <input type="text" placeholder="Required" th:field="*{model}" class="input-field" autofocus required>
                 </td>
             </tr>
             <tr>
-                <td>Monthly price</td>
+                <td><strong>Monthly price</strong></td>
                 <td>
                     <input type="number" placeholder="Price in DKK" min="0" step="0.01" th:field="*{monthly_price}" class="input-field">
                 </td>
             </tr>
             <tr>
-                <td>Brand</td>
+                <td><strong>Brand</strong></td>
                 <td>
                     <input type="text" th:field="*{brand}" class="input-field">
                 </td>
             </tr>
             <tr>
-                <td>Chassis number</td>
+                <td><strong>Chassis number</strong></td>
                 <td>
                     <input type="text" th:field="*{chassis_number}" class="input-field">
                 </td>
             </tr>
             <tr>
-                <td>CO2 emissions</td>
+                <td><strong>CO2 emissions</strong></td>
                 <td>
                     <input type="number" th:field="*{co2_emissions}" class="input-field">
                 </td>
             </tr>
             <tr>
-                <td>State</td>
+                <td><strong>State</strong></td>
                 <td>
                     <select th:field="*{state}" class="select-field">
                         <option value="In storage">In storage</option>
@@ -88,6 +88,16 @@
                 <input type="submit" class="button" value="Cancel">
             </form>
         </div>
+    </div>
+
+    <div>
+    <form action="/addAdditionalImage" method="post" enctype="multipart/form-data">
+        <input type="submit" class="button" value="Add additional image">
+        <input type="hidden"  class="button" name="stateFilter" th:value="${stateFilter}">
+        <input type="hidden" name="car_id" th:value="${car.car_id}">
+        <input type="file" name="newImage" accept="image/*" class="file-input">
+
+    </form>
     </div>
 </section>
 

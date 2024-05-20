@@ -146,7 +146,7 @@ body {
     max-width: 800px;
 }
 table {
-    width: 100%;
+    width: fit-content;
     border-collapse: collapse;
     margin-bottom: 1rem;
 }
@@ -176,7 +176,7 @@ tr:nth-child(even) {
     margin-bottom: 0.5rem;
 }
 .button.delete {
-    background: #ff6666;
+    background: #fdcc04;
     color: white;
 }
 
@@ -253,8 +253,18 @@ tr:nth-child(even) {
 
 .form-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 1.5rem;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(253, 204, 4, 0.3);
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 .go-back-button {
@@ -299,12 +309,12 @@ tr:nth-child(even) {
 }
 .car-list {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row;
+    gap: 2rem;
 }
 
 table {
-    width: 100%;
+    width: fit-content;
     border-collapse: collapse;
     margin-bottom: 1rem;
 }
@@ -318,11 +328,6 @@ table {
 /*add car
  */
 
-.body-add-car {
-    font-family: monospace;
-    background-size: cover;
-    background: radial-gradient(#FFEB3B, transparent);
-}
 
 .add-car-section {
     padding: 2rem;
@@ -437,8 +442,17 @@ table {
 .car-details, .car-actions, .back-action, .additional-images, .edit-equipment {
     margin-bottom: 2rem;
 }
+.additional-image-form {
+    display: flex;
+    align-items: end;
+    justify-content: right;
+    gap: 1rem;
+    width: 100%;
+}
+
 .file-input {
-    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -453,6 +467,28 @@ table {
     .car-details-table td, .car-actions-table td, .additional-images-table td, .equipment-list-table td {
         text-align: center;
     }
+}
+
+/*edit equipment
+ */
+
+.text-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.equipment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+.equipment-list-table {
+    margin-bottom: 1rem;
+    width: 100%;
 }
 
 

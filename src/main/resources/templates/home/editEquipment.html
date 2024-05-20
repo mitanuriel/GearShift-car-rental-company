@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit equipment</title>
+    <title>Edit Equipment| GearShift </title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
-    <table th:if="${equipmentList != null}">
+<header>
+    <div class="header">
+        <h1 class="title">GearShift</h1>
+    </div>
+</header>
+
+
+<div class="form-actions">
+    <div class="button-container">
+    <table th:if="${equipmentList != null}" class="equipment-list-table">
         <tr th:each="equipment : ${equipmentList}">
             <td th:text="${equipment.description}"></td>
             <td>
@@ -13,25 +23,27 @@
                     <input type="hidden" name="stateFilter" th:value="${stateFilter}">
                     <input type="hidden" name="equipment_id" th:value="${equipment.equipment_id}">
                     <input type="hidden" name="car_id" th:value="${equipment.car_id}">
-                    <input type="submit" value="Delete">
+                    <input type="submit" class="button" value="Delete">
                 </form>
             </td>
         </tr>
     </table>
 
-    <form action="/insertEquipment" method="post" th:object="${newEquipment}">
+    <form action="/insertEquipment" method="post" th:object="${newEquipment}" class="equipment-form">
         <input type="hidden" name="stateFilter" th:value="${stateFilter}">
         <input type="hidden" th:field="*{equipment_id}">
-        <input type="text" th:field="*{description}">
+        <input type="text" th:field="*{description}" class="text-input">
         <input type="hidden" th:field="*{car_id}">
-        <input type="submit" value="Save new equipment">
+        <input type="submit" class="button" value="Save new equipment">
     </form>
 
     <form action="/carDetails" method="get">
         <input type="hidden" name="stateFilter" th:value="${stateFilter}">
         <input type="hidden" name="car_id" th:value="${car_id}">
-        <input type="submit" value="Go back">
+        <input type="submit" class="button" value="Go back">
     </form>
+    </div>
+</div>
 
 
 </body>
