@@ -3,27 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
+<header>
+    <div class="header">
+        <h1 class="title">GearShift</h1>
+    </div>
+</header>
 <body>
+<section class="add-car-section">
 
 <form action="/addnewCostumer" method="POST">
+    <div class="form-group">
     <label for="name">name:</label>
     <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">email:</label>
+        <input type="text" id="email" name="email" required>
+    </div>
 
-    <label for="email">email:</label>
-    <input type="text" id="email" name="email" required>
+    <div class="form-group">
+        <label for="phone_number">phone_number:</label>
+        <input type="text" id="phone_number" name="phone_number" required>
+    </div>
 
-    <label for="phone_number">phone_number:</label>
-    <input type="text" id="phone_number" name="phone_number" required>
+    <div class="form-group">
+        <label for="address">address:</label>
+        <input type="text" id="address" name="address" required>
+    </div>
 
-    <label for="address">address:</label>
-    <input type="text" id="address" name="address" required>
+    <button type="submit" class="button">Create Contract</button>
 
-    <button type="submit">Create Contract</button>
 </form>
 
-<form action="/Showcostumerlist">
-    <button type="submit">Cancel</button>
-</form>
+
+
+
+        <div class="form-actions">
+            <form action="/Showcostumerlist">
+                <button type="submit" class="button">Cancel</button>
+            </form>
+
+    </div>
+
+</section>
+
 </body>
 </html>

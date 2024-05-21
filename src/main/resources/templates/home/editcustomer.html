@@ -3,36 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div class="form-container">
-    <h1>Edit Customer</h1>
-    <form action="/Editcustomer" method="POST">
-        <input type="hidden" name="customerid" th:value="${customeredit.customer_id}">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" th:value="${customeredit.name}" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" th:value="${customeredit.email}" required>
-        </div>
-        <div class="form-group">
-            <label for="phonenumber">Phone Number:</label>
-            <input type="text" id="phonenumber" name="phonenumber" th:value="${customeredit.phone_number}" required>
-        </div>
-        <div class="form-group">
-            <label for="adress">Address:</label>
-            <input type="text" id="adress" name="adress" th:value="${customeredit.address}" required>
-        </div>
-        <div class="form-group">
-            <button type="submit">Update Customer</button>
-        </div>
-    </form>
-</div>
-<form action="/gotocustomerlist">
-    <button type="submit"> cancel</button>
-</form>
+<header>
+    <div class="header">
+        <h1 class="title">GearShift</h1>
+    </div>
+</header>
+<section class="add-car-section">
+    <div class="form-container">
+        <h1>Edit Customer</h1>
+        <form action="/Editcustomer" method="POST">
+            <input type="hidden" name="customerid" th:value="${customeredit.customer_id}">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" th:value="${customeredit.name}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" th:value="${customeredit.email}" required>
+            </div>
+            <div class="form-group">
+                <label for="phonenumber">Phone Number:</label>
+                <input type="text" id="phonenumber" name="phonenumber" th:value="${customeredit.phone_number}" required>
+            </div>
+            <div class="form-group">
+                <label for="adress">Address:</label>
+                <input type="text" id="adress" name="adress" th:value="${customeredit.address}" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button">Update Customer</button>
+            </div>
+        </form>
+        <form action="/gotocustomerlist">
+            <button type="submit" class="button"> cancel</button>
+        </form>
+    </div>
+
+
+
+</section>
 
 </body>
 </html>

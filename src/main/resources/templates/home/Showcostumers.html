@@ -3,49 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body>
-<h1>Customer List</h1>
- <h1 th:value="${getcostumerlist}"></h1>
-<form action="/newcustomer" method="GET">
-    <div>
-        <button type="submit">add costumer</button>
+<body><header>
+    <div class="header">
+        <h1 class="title">GearShift</h1>
     </div>
-</form>
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Address</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="list: ${getcostumerlist}">
+</header>
 
-        <td th:text="${list.name}"></td>
-        <td th:text="${list.email}"></td>
-        <td th:text="${list.phone_number}"></td>
-        <td th:text="${list.address}"></td>
-        <td>
-            <form action="/editcustomer" method="GET">
-                <input type="hidden" name="customerid" th:value="${list.customer_id}">
-                <button type="submit">Edit </button>
-            </form>
-        </td>
+<section class="add-car-section">
 
-        <td>
-            <form action="/confirmdeletecustomer" method="GET">
-                <input type="hidden" name="customerid" th:value="${list.customer_id}">
-                <button type="submit"> Delete </button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<form action="/gotomenu" method="GET">
-    <button type="submit">GO to menu</button>
-</form>
+
+
+
+    <div class="button-container">
+        <h1>Customer List</h1>
+        <form action="/newcustomer" method="GET">
+            <div>
+                <button type="submit" class="button">add costumer</button>
+            </div>
+        </form>
+    </div>
+    <div class="form-actions">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="list: ${getcostumerlist}">
+                    <td th:text="${list.name}"></td>
+                    <td th:text="${list.email}"></td>
+                    <td th:text="${list.phone_number}"></td>
+                    <td th:text="${list.address}"></td>
+                    <td>
+                        <form action="/editcustomer" method="GET">
+                            <input type="hidden" name="customerid" th:value="${list.customer_id}">
+                            <button type="submit" class="button">Edit </button>
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="/confirmdeletecustomer" method="GET">
+                            <input type="hidden" name="customerid" th:value="${list.customer_id}">
+                            <button type="submit" class="button"> Delete </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+    </div>
+    <div class="button-container">
+    <form action="/gotomenu" method="GET">
+        <button type="submit" class="button">GO to menu</button>
+    </form>
+    </div>
+</section>
+
+
+
+
 </body>
 </html>

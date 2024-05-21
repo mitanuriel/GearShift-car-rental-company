@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<section class="add-car-section">
+    <div class="form-actions">
 <table>
     <tr>
         <td>Customer ID:</td>
@@ -27,13 +30,19 @@
         <td th:text="${customer.address}"></td>
     </tr>
 </table>
-<form action="/deletecustomer" method="post">
-    <input type="hidden" name="customerid" th:value="${customer.customer_id}">
-    <button type="submit" class="delete_button"> Delete</button>
-</form>
 
-<form action="/gotocustomerlist">
-    <button type="submit"> cancel</button>
-</form>
+    </div>
+    <div class="button-container">
+    <form action="/deletecustomer" method="post">
+        <input type="hidden" name="customerid" th:value="${customer.customer_id}">
+        <button type="submit" class="button"> Delete</button>
+    </form>
+
+    <form action="/gotocustomerlist">
+        <button type="submit" class="button"> cancel</button>
+    </form>
+    </div>
+</section>
+
 </body>
 </html>
