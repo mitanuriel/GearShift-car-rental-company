@@ -6,7 +6,9 @@
     <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-
+<form action="/gotoContracts" method="GET">
+    <button type="submit" class="button">Create Contract</button>
+</form>
 <header>
     <div class="header">
         <h1 class="title">GearShift</h1>
@@ -37,9 +39,6 @@
             </td>
 
             <div class="button-container">
-                <form action="/gotoContracts" method="GET">
-                    <button type="submit" class="button">Create Contract</button>
-                </form>
 
                 <form action="/Editcontract" method="GET">
                     <input type="hidden" name="contract_id" th:value="${list.contract_id}">
