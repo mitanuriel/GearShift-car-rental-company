@@ -16,6 +16,7 @@
 <section class="add-car-section">
     <div class="form-actions">
 
+
 <form action="/ShowRepport">
     <div class="form-group">
         <label for="start"><strong>Contract Start Date:</strong></label>
@@ -26,21 +27,25 @@
         <label for="end"><strong>Contract End Date:</strong></label>
         <input type="date" id="end" name="end" required>
     </div>
+
+    <div class="button-container">
+        <button type="submit" class="button">Show Price</button>
+    </div>
+
 </form>
+    </div>
 
-        <div class="button-container">
-        <form>
-    <button type="submit" class="button">Show Price</button>
+    <div class="price-container">
+        <span class="price-label">Price: </span>
+        <span class="price-value" th:text="${timeprice}"></span>
+    </div>
+    <div class="form-group">
+        <form action="/gotomenu" method="GET">
+            <button type="submit" class="button">Go To Menu</button>
         </form>
-    <p th:text="${timeprice}"></p>
-
-    <form action="/gotomenu" method="GET">
-        <button type="submit" class="button">Go To Menu</button>
-    </form>
-        </div>
-
     </div>
 </section>
+
 
 </body>
 </html>
