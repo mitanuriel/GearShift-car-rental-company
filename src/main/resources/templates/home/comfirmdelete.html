@@ -5,17 +5,17 @@
     <title>Delete Contract | GearShift</title>
     <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body class="body-contracts">
+<body>
 
 <header>
     <div class="header">
-        <h1 class="title-contracts">GearShift</h1>
+        <h1 class="title">GearShift</h1>
     </div>
 </header>
 
-<section class="form-container">
+<section class="add-car-section">
     <h3>Delete Contract</h3>
-    <table>
+    <table class="car-form-table">
         <tr>
             <td>Contract ID:</td>
             <td th:text="${contract.contract_id}"></td>
@@ -32,7 +32,7 @@
 
     <form action="/delete" method="post">
         <input type="hidden" name="contract_id" th:value="${contractid}">
-        <button type="submit" class="button-delete">Delete</button>
+        <button type="submit" class="button">Delete</button>
     </form>
 
     <form action="/gotoshowcontracts" method="GET">

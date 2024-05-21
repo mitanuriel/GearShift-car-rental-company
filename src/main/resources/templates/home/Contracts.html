@@ -6,9 +6,7 @@
     <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<form action="/gotoContracts" method="GET">
-    <button type="submit" class="button">Create Contract</button>
-</form>
+
 <header>
     <div class="header">
         <h1 class="title">GearShift</h1>
@@ -36,38 +34,29 @@
             <td><strong th:text="${list.contract_end}"></strong></td>
             <td><strong th:text="${list.price}"></strong></td>
             <td>
-            </td>
-
-            <div class="button-container">
-
                 <form action="/Editcontract" method="GET">
                     <input type="hidden" name="contract_id" th:value="${list.contract_id}">
-                    <button type="submit" class="button">Edit contract</button>
+                    <button type="submit" class="button">Edit</button>
                 </form>
-
-                <form action="/gotomenu" method="GET">
-                    <button type="submit" class="button">Go to Menu</button>
-                </form>
-
                 <form action="/comfirmDelete" method="GET">
                     <input type="hidden" name="contract_id" th:value="${list.contract_id}">
                     <button type="submit" class="button">Delete</button>
                 </form>
-        </div>
+            </td>
+
 
         </tr>
         </tbody>
     </table>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+        <div class="button-container">
+        <form action="/gotoContracts" method="GET">
+            <button type="submit" class="button">Create Contract</button>
+        </form>
 
+        <form action="/gotomenu" method="GET">
+            <button type="submit" class="button">Go to Menu</button>
+        </form>
+</div>
         </div>
 </section>
 
