@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New Customer | GearShift</title>
     <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <header>
@@ -15,30 +15,27 @@
 
 <form action="/addnewCostumer" method="POST">
     <div class="form-group">
-    <label for="name">name:</label>
+    <label for="name"><strong>Name:</strong></label>
     <input type="text" id="name" name="name" required>
     </div>
     <div class="form-group">
-        <label for="email">email:</label>
+        <label for="email"><strong>E-mail:</strong></label>
         <input type="text" id="email" name="email" required>
     </div>
 
     <div class="form-group">
-        <label for="phone_number">phone_number:</label>
+        <label for="phone_number"><strong>Phone number:</strong></label>
         <input type="text" id="phone_number" name="phone_number" required>
     </div>
 
     <div class="form-group">
-        <label for="address">address:</label>
+        <label for="address"><strong>Address:</strong></label>
         <input type="text" id="address" name="address" required>
     </div>
 
     <button type="submit" class="button">Create Contract</button>
 
 </form>
-
-
-
 
         <div class="form-actions">
             <form action="/Showcostumerlist">
