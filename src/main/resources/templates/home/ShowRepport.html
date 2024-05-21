@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Show Rapport | GearShift</title>
@@ -39,11 +39,15 @@
         <span class="price-label">Price: </span>
         <span class="price-value" th:text="${timeprice}"></span>
     </div>
+
+    <div class="button-container">
     <div class="form-group">
         <form action="/gotomenu" method="GET">
             <button type="submit" class="button">Go To Menu</button>
         </form>
     </div>
+    </div>
+
 </section>
 
 
