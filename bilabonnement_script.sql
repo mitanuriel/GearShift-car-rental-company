@@ -4,6 +4,14 @@ USE bilabonnement;
 Create user 'bruger5' identified  by '12345';
 grant select, insert, delete, update on bilabonnement.* to 'bruger5';
 
+CREATE TABLE administrator (
+    administrator_id INT,
+    password varchar(255)
+);
+
+INSERT INTO administrator(administrator_id, password)
+VALUES (1, '123'); 
+
 CREATE TABLE car (
     car_id INT AUTO_INCREMENT,
     model VARCHAR(255),
@@ -13,8 +21,10 @@ CREATE TABLE car (
     chassis_number VARCHAR(255),
     co2_emissions INT,
     image MEDIUMBLOB,
+    administrator_id INT DEFAULT 1,
     state ENUM('In storage', 'Being used', 'Under inspection'),
-    PRIMARY KEY (car_id)
+    PRIMARY KEY (car_id),
+    FOREIGN KEY (administrator_id) REFERENCES administrator(administrator_id)
 );
 
 CREATE TABLE car_image (
@@ -39,7 +49,9 @@ CREATE TABLE customer (
     email VARCHAR(255),
     phone_number VARCHAR(255),
     address VARCHAR(255),
-    PRIMARY KEY (customer_id)
+    administrator_id INT DEFAULT 1,
+    PRIMARY KEY (customer_id),
+    FOREIGN KEY (administrator_id) REFERENCES administrator(administrator_id)
 );
 
 CREATE TABLE contract (
@@ -62,9 +74,3 @@ CREATE TABLE damages (
     PRIMARY KEY (damages_id),
     FOREIGN KEY (contract_id) REFERENCES contract(contract_id)
 );
-
-CREATE TABLE passwords (
-    password varchar(255)
-);
-INSERT INTO passwords (password)
-VALUES (123); 
