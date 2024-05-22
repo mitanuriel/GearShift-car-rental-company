@@ -6,7 +6,8 @@ grant select, insert, delete, update on bilabonnement.* to 'bruger5';
 
 CREATE TABLE administrator (
     administrator_id INT,
-    password varchar(255)
+    password varchar(255),
+    PRIMARY KEY (administrator_id)
 );
 
 INSERT INTO administrator(administrator_id, password)
