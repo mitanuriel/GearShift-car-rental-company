@@ -16,9 +16,14 @@
 
 
 <section class="add-car-section">
-    <div class="form-actions">
-    <p th:text="${message}"></p>
-    <p th:text="${Error}"></p>
+    <div class="form-group">
+    <div class="price-container">
+        <span class="price-label"></span>
+        <span class="price-value"  th:text="${message}" ></span>
+        <span class="price-value"  th:text="${Error}" ></span>
+    </div>
+    </div>
+
     <form action="/newcontract1" method="POST">
         <div class="form-group">
             <label for="phonenumber"><strong>Phone Number:</strong></label>
@@ -39,7 +44,12 @@
         <label for="contract_end"><strong>Contract End Date:</strong></label>
         <input type="date" id="contract_end" name="contract_end" required>
         </div>
-        <button class="button" type="submit">Create Contract</button>
+        <div class="form-actions">
+            <div class="button-container">
+                <button class="button" type="submit">Create Contract</button>
+            </div>
+        </div>
+
     </form>
 
     </div>
