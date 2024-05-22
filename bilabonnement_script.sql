@@ -9,7 +9,7 @@ CREATE TABLE administrator (
     password varchar(255)
 );
 
-INSERT INTO administrator (administrator_id, password)
+INSERT INTO administrator(administrator_id, password)
 VALUES (1, '123'); 
 
 CREATE TABLE car (
