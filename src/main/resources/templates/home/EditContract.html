@@ -40,15 +40,21 @@
             <input type="number" id="price" name="price" th:value="${contractedit.price}" step="0.01" required>
         </div>
         </div>
-        <!-- Submit and Cancel buttons -->
-        <button type="submit" class="button">Update Contract</button>
+
+        <div class="form-actions">
+            <button type="submit" class="button">Update Contract</button>
+        </div>
+
 
     </form>
 
-    <form action="/gotoshowcontracts" method="GET">
-        <button type="submit" class="button">Go back</button>
-    </form>
+    <div class="form-actions">
+        <form action="/gotoshowcontracts" method="GET">
+            <button type="submit" class="button">Go back</button>
+        </form>
     </div>
+
+
 </section>
 
 

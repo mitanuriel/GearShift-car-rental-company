@@ -81,11 +81,14 @@
             </tr>
             <tr>
                 <td>
-                    <form action="/carDetails" method="get">
-                        <input type="hidden" name="car_id" th:value="${car.car_id}">
-                        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-                        <input type="submit" class="button" value="Select">
-                    </form>
+                    <div class="form-actions">
+                        <form action="/carDetails" method="get">
+                            <input type="hidden" name="car_id" th:value="${car.car_id}">
+                            <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                            <input type="submit" class="button" value="Select">
+                        </form>
+                    </div>
+
                 </td>
             </tr>
         </table>
