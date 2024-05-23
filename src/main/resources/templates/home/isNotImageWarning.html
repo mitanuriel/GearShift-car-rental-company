@@ -16,21 +16,7 @@
 <section class="message-section">
     <p class="message">File must be an image</p>
     <div class="form-container">
-        <form action="/notImage" method="post" th:object="${car}" th:if="${action == 'insert' or action == 'update'}">
-            <input type="hidden" name="action" th:value="${action}">
-            <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-            <input type="hidden" th:field="*{car_id}">
-            <input type="hidden" th:field="*{model}">
-            <input type="hidden" th:field="*{monthly_price}">
-            <input type="hidden" th:field="*{brand}">
-            <input type="hidden" th:field="*{chassis_number}">
-            <input type="hidden" th:field="*{co2_emissions}">
-            <input type="hidden" th:field="*{state}">
-            <input type="hidden" name="oldImage" th:value="${oldImage}">
-            <input type="submit" class="button" value="OK">
-        </form>
-
-        <form action="/carDetails" method="get" th:unless="${action == 'insert' or action == 'update'}">
+        <form action="/editImages" method="get">
             <input type="hidden" name="stateFilter" th:value="${stateFilter}">
             <input type="hidden" name="car_id" th:value="${car_id}">
             <input type="submit" class="not-image-button" value="OK">

@@ -4,6 +4,7 @@ package com.example.carrental.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.carrental.model.Damages;
@@ -18,15 +19,23 @@ public class DamagesController {
         this.damagesService = damagesService;
     }
     
-    @GetMapping("/editDamages")
-    public String editDamages(Model model, @RequestParam int contract_id) {
-        model.addAttribute("contract_id", contract_id);
-        return "home/editDamages";
-    }
-
+    @PostMapping("/updateDamages")
     public String updateDamages(@ModelAttribute Damages damages) {
         damagesService.update(damages);
 
-        return "redirect:/contractDetails";
+        return "redirect:/showDamageReport?contract_id=" + damages.getContract_id();
+    }
+
+    @GetMapping("/showDamageReport")
+    public String showDamageReport(Model model, @RequestParam int contract_id) {
+        if (damagesService.getDamages(contract_id).isEmpty()) {
+            Damages damageReport = new Damages();
+            damageReport.setPrice(0.0);
+            damageReport.setContract_id(contract_id);
+            damagesService.insert(damageReport);
+        }
+
+        model.addAttribute("damageReport", damagesService.getDamages(contract_id).get(0));
+        return "home/showDamages";
     }
 }

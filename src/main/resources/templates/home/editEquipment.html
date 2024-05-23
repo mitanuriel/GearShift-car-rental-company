@@ -32,7 +32,7 @@
     <form action="/insertEquipment" method="post" th:object="${newEquipment}" class="equipment-form">
         <input type="hidden" name="stateFilter" th:value="${stateFilter}">
         <input type="hidden" th:field="*{equipment_id}">
-        <input type="text" th:field="*{description}" class="text-input">
+        <input type="text" th:field="*{description}" class="text-input" autofocus required>
         <input type="hidden" th:field="*{car_id}">
         <input type="submit" class="button" value="Save new equipment">
     </form>

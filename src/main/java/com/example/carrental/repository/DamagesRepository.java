@@ -1,6 +1,9 @@
 package com.example.carrental.repository;
 
 import com.example.carrental.model.Damages;
+
+import java.util.List;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,10 +16,10 @@ public class DamagesRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Damages getDamages(int damages_id) {
-        String query = "SELECT * FROM damages WHERE damages_id = ?;";
+    public List<Damages> getDamages(int contract_id) {
+        String query = "SELECT * FROM damages WHERE contract_id = ?;";
         BeanPropertyRowMapper<Damages> rowMapper = new BeanPropertyRowMapper<>(Damages.class);
-        return jdbcTemplate.queryForObject(query, rowMapper, damages_id);
+        return jdbcTemplate.query(query, rowMapper, contract_id);
     }
 
     public void insert(Damages damages) {

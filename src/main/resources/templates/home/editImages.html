@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Car | GearShift</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<header>
+    <div class="header">
+        <h1 class="title">GearShift</h1>
+    </div>
+</header>
+
+<div class="form-actions">
+    <div class="button-container">
+    <table>
+        <tr>Main image</tr>
+        <tr th:unless="${car.image == null}">
+            <td>
+                <img th:src="@{'data:;base64,' + ${car.encodeImageToBase64String()}}" width="200">
+            </td>
+            <td>
+                <form action="/deleteImage" method="post">
+                    <input type="hidden" name="car_id" th:value="${car.car_id}">
+                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                    <input type="submit" class="button" value="Delete image">
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${car.image == null}"><td>[No main image]</td></tr>
+    </table>
+
+    <form action="/saveImage" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+        <input type="hidden" name="car_id" th:value="${car.car_id}">
+        <input type="file" name="image" accept="image/*" class="file-input">
+        <input type="submit" class="button" value="Add image" th:if="${car.image == null}">
+        <input type="submit" class="button" value="Change image" th:if="${car.image != null}">
+    </form>
+
+    <table>
+        <tr>Additional images</tr>
+        <tr th:each="carImage : ${carImages}" th:if="${!carImages.isEmpty()}">
+            <td>
+                <img th:src="@{'data:;base64,' + ${carImage.encodeImageToBase64String()}}" width="200">
+            </td>
+            <td>
+                <form action="/deleteAdditionalImage" method="post">
+                    <input type="hidden" name="car_id" th:value="${car.car_id}">
+                    <input type="hidden" name="car_image_id" th:value="${carImage.car_image_id}">
+                    <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+                    <input type="submit" class="button" value="Delete image">
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${carImages.isEmpty()}">[No additional images]</tr>
+    </table>
+
+    <form action="/addAdditionalImage" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+        <input type="hidden" name="car_id" th:value="${car.car_id}">
+        <input type="file" name="image" accept="image/*" class="file-input">
+        <input type="submit" class="button" value="Add additional image">
+    </form>
+
+    <form action="/carDetails" method="get">
+        <input type="hidden" name="stateFilter" th:value="${stateFilter}">
+        <input type="hidden" name="car_id" th:value="${car.car_id}">
+        <input type="submit" class="button" value="Go back">
+    </form>
+    </div>
+</div>
+
+</body>
+</html>

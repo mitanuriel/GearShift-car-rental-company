@@ -2,9 +2,11 @@ package com.example.carrental.controller;
 
 import com.example.carrental.model.Customer;
 import com.example.carrental.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.carrental.service.AdministratorService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,12 +16,20 @@ import java.util.List;
 
 @Controller
 public class CustomerController {
-    @Autowired
-    public CustomerService customerService;
-
+    private CustomerService customerService;
+    private AdministratorService administratorService;
+    
+    public CustomerController(CustomerService customerService, AdministratorService administratorService) {
+        this.customerService = customerService;
+        this.administratorService = administratorService;
+    }
 
     @GetMapping("/newcustomer")
-    public String newcustomer(){
+    public String newcustomer(@CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         return "home/newCustomer";
     }
 
@@ -31,7 +41,11 @@ public class CustomerController {
     }
 
     @GetMapping("/Showcostumerlist")
-    public String showcostumerlist(Model model){
+    public String showcostumerlist(Model model, @CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("getcostumerlist",customerService.getcostumerlist());
 
         System.out.println(customerService.getcostumerlist());
@@ -39,7 +53,11 @@ public class CustomerController {
     }
 
     @GetMapping("/editcustomer")
-    public String editcustomer(Model model,@RequestParam int customerid ){
+    public String editcustomer(Model model,@RequestParam int customerid, @CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("customeredit",customerService.getperson(customerid));
         return "home/editcustomer";
     }
@@ -51,7 +69,11 @@ public class CustomerController {
     }
 
     @GetMapping("/confirmdeletecustomer")
-    public String confirmdelete(Model model,@RequestParam int customerid){
+    public String confirmdelete(Model model,@RequestParam int customerid, @CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         Customer customer = customerService.getperson(customerid);
 
         // Add customer object to the model

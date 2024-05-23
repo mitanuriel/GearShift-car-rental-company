@@ -3,8 +3,6 @@ package com.example.carrental.service;
 import com.example.carrental.model.Contract;
 import com.example.carrental.model.contractlist;
 import com.example.carrental.repository.ContractRepository;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,11 +10,8 @@ import java.util.List;
 
 @Service
 public class ContractService {
-
-
     private ContractRepository contractRepository;
 
-    @Autowired
     public ContractService(ContractRepository contractrepository){
         this.contractRepository = contractrepository;
 

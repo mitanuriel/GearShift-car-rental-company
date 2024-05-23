@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Equipment| GearShift </title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<header>
+    <div class="header">
+        <h1 class="title">GearShift</h1>
+    </div>
+</header>
+
+<div class="form-actions">
+    <div class="button-container">
+    <form action="/updateDamages" method="post" th:object="${damageReport}">
+        <table>
+            <tr>
+                <td>
+                    <textarea placeholder="Write damage report here" rows="4" cols="50" th:field="*{description}" class="input-field"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" placeholder="Price in DKK" min="0" step="0.01" th:field="*{price}" class="input-field">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" th:field="*{damages_id}">
+                    <input type="hidden" th:field="*{contract_id}">
+                    <input type="submit" value="Save" class="button">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form action="/ShowContracts" method="get">
+        <input type="submit" value="Go back" class="button">
+    </form>
+
+    </div>
+</div>
+
+
+</body>
+</html>

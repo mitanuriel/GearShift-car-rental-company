@@ -2,6 +2,9 @@ package com.example.carrental.service;
 
 import com.example.carrental.model.Damages;
 import com.example.carrental.repository.DamagesRepository;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,8 +15,8 @@ public class DamagesService {
         this.damagesRepository = damagesRepository;
     }
 
-    public Damages getDamages(int damages_id) {
-        return damagesRepository.getDamages(damages_id);
+    public List<Damages> getDamages(int contract_id) {
+        return damagesRepository.getDamages(contract_id);
     }
 
     public void insert(Damages damages) {

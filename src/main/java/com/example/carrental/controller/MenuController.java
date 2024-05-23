@@ -1,15 +1,20 @@
 package com.example.carrental.controller;
 
-import com.example.carrental.service.CustomerService;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.carrental.service.AdministratorService;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-
 public class MenuController {
+    private AdministratorService administratorService;
+
+    public MenuController(AdministratorService administratorService) {
+        this.administratorService = administratorService;
+    }
 
     @GetMapping("/gotoContracts")
     public String gotocontract(){
@@ -17,17 +22,30 @@ public class MenuController {
     }
 
     @GetMapping("/gotomenu")
-    public String gotomenu(){
+    public String gotomenu(@CookieValue(required = false) String passwd){
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         return "home/Menu";
     }
     @GetMapping("/logout")
-    public String logout(HttpSession session){
-        session.removeAttribute("adminlogin");
+    public String logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("passwd", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+
+        response.addCookie(cookie);
+
         return "home/index";
     }
 
     @GetMapping("/gotoshowrepport")
-    public String gotoshowrepport(){
+    public String gotoshowrepport(@CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         return "home/ShowRepport";
     }
     @GetMapping("/gotoshowcontracts")
@@ -41,7 +59,10 @@ public class MenuController {
     }
 
     @GetMapping("/gotocreatecostumer")
-    public String gotocreatecostumer(){
+    public String gotocreatecostumer(@CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
         return "home/newCustomer";
     }
     @GetMapping("/gotocustomerlist")

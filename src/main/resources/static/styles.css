@@ -519,7 +519,7 @@ table {
 }
 .price-label {
     font-weight: bold;
-    color: #333;
+    color: red;
 }
 .price-value {
     font-size: 1.2em;

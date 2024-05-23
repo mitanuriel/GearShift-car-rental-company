@@ -32,6 +32,7 @@
             <option th:selected="${stateFilter == 'In storage'}">In storage</option>
             <option th:selected="${stateFilter == 'Being used'}">Being used</option>
             <option th:selected="${stateFilter == 'Under inspection'}">Under inspection</option>
+            <option th:selected="${stateFilter == 'Out of commission'}">Out of commission</option>
         </select>
         <input class="button" type="submit" value="Filter list">
     </form>
@@ -40,18 +41,44 @@
     <div class="car-list">
         <table class="car-form-table" th:each="car : ${cars}">
             <tr th:if="${car.image != null}">
-                <td><img th:src="@{'data:image/*;base64,' + ${car.encodeImageToBase64String()}}" class="car-image"></td>
+                <td><img th:src="@{'data:;base64,' + ${car.encodeImageToBase64String()}}" height="125"></td>
             </tr>
-            <tr th:if="${car.image == null}">
+            <tr th:if="${car.image == null and carImageService.getAllImages(car.car_id).isEmpty()}">
                 <td>[No image]</td>
             </tr>
-            <tr><td> <strong th:text="${car.model}"></strong></td></tr>
-            <tr><td> <strong  th:text="${car.monthly_price}"></strong></td></tr>
-            <tr><td> <strong  th:text="${car.brand}"></strong></td></tr>
-            <tr><td> <strong th:text="${car.license_plate}"></strong></td></tr>
-            <tr><td> <strong th:text="${car.chassis_number}"></strong></td></tr>
-            <tr><td> <strong th:text="${car.co2_emissions}"></strong></td></tr>
-            <tr><td> <strong th:text="${car.state}"></strong></td></tr>
+            <tr th:if="${car.image == null and !carImageService.getAllImages(car.car_id).isEmpty()}">
+                <td>
+                    <img th:src="@{'data:;base64,' + ${carImageService.getFirstImageAsString(car.car_id)}}" height="125">
+                </td>
+            </tr>
+            <tr>
+                <td>Model</td>
+                <td> <strong th:text="${car.model}"></strong></td>
+            </tr>
+            <tr>
+                <td>Monthly price</td>
+                <td> <strong  th:text="${car.monthly_price}"></strong></td>
+            </tr>
+            <tr>
+                <td>Brand</td>
+                <td> <strong  th:text="${car.brand}"></strong></td>
+            </tr>
+            <tr>
+                <td>License plate</td>
+                <td> <strong th:text="${car.license_plate}"></strong></td>
+            </tr>
+            <tr>
+                <td>Chassis number</td>
+                <td> <strong th:text="${car.chassis_number}"></strong></td>
+            </tr>
+            <tr>
+                <td>CO2 emmissions (g/km)</td>
+                <td> <strong th:text="${car.co2_emissions}"></strong></td>
+            </tr>
+            <tr>
+                <td>State</td>
+                <td> <strong th:text="${car.state}"></strong></td>
+            </tr>
             <tr>
                 <td>
                     <form action="/carDetails" method="get">

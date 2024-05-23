@@ -14,17 +14,8 @@
 </header>
 
 <section class="add-car-section">
-    <form id="carForm" action="/updateDB" method="post" th:object="${car}" enctype="multipart/form-data">
+    <form id="carForm" action="/updateDB" method="post" th:object="${car}">
         <table class="car-form-table">
-            <tr>
-                <td  th:if="${car.image != null}">
-                    <img th:src="@{'data:image/*;base64,' + ${car.encodeImageToBase64String()}}" class="car-image">
-                </td>
-                <td th:if="${car.image == null}">Select image</td>
-                <td >
-                    <input type="file" name="newImage" accept="image/*">
-                </td>
-            </tr>
             <tr>
                 <td><strong>Model</strong></td>
                 <td>
@@ -41,6 +32,12 @@
                 <td><strong>Brand</strong></td>
                 <td>
                     <input type="text" th:field="*{brand}" class="input-field">
+                </td>
+            </tr>
+            <tr>
+                <td><strong>License plate</strong></td>
+                <td>
+                    <input type="text" th:field="*{license_plate}" class="input-field">
                 </td>
             </tr>
             <tr>
@@ -62,6 +59,7 @@
                         <option value="In storage">In storage</option>
                         <option value="Being used">Being used</option>
                         <option value="Under inspection">Under inspection</option>
+                        <option value="Out of commission">Out of commission</option>
                     </select>
                 </td>
             </tr>
@@ -69,8 +67,7 @@
         <input type="hidden" th:field="*{car_id}">
         <input type="hidden" name="action" th:value="${action}">
         <input type="hidden" name="stateFilter" th:value="${stateFilter}">
-        <input type="hidden" name="oldImage" th:value="${car.encodeImageToBase64String()}" th:if="${car.image != null}">
-        <input type="hidden" name="oldImage" value="No image" th:if="${car.image == null}">
+        <input type="hidden" name="image" th:value="${car.encodeImageToBase64String()}" th:if="${car.image != null}">
     </form>
 
     <div class="form-actions">
@@ -88,16 +85,6 @@
                 <input type="submit" class="button" value="Cancel">
             </form>
         </div>
-    </div>
-
-    <div>
-    <form action="/addAdditionalImage" method="post" enctype="multipart/form-data">
-        <input type="submit" class="button" value="Add additional image">
-        <input type="hidden"  class="button" name="stateFilter" th:value="${stateFilter}">
-        <input type="hidden" name="car_id" th:value="${car.car_id}">
-        <input type="file" name="newImage" accept="image/*" class="file-input">
-
-    </form>
     </div>
 </section>
 

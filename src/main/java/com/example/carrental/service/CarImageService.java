@@ -1,5 +1,6 @@
 package com.example.carrental.service;
 
+import java.util.Base64;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.example.carrental.model.CarImage;
@@ -15,6 +16,17 @@ public class CarImageService {
 
     public List<CarImage> getAllImages(int car_id) {
         return carImageRepository.getAllImages(car_id);
+    }
+
+    public String getFirstImageAsString(int car_id) {
+        List<CarImage> allImages = getAllImages(car_id);
+
+        String imageString = null;
+        if (allImages != null) {
+            imageString = Base64.getEncoder().encodeToString(allImages.get(0).getImage());
+        }
+
+        return imageString;
     }
 
     public void insert(CarImage carImage) {

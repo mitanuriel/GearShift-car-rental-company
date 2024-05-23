@@ -2,15 +2,18 @@ package com.example.carrental.controller;
 import com.example.carrental.model.Car;
 import com.example.carrental.model.Contract;
 import com.example.carrental.model.Customer;
-import com.example.carrental.model.password;
 import com.example.carrental.service.CarService;
 import com.example.carrental.service.ContractService;
 import com.example.carrental.service.CustomerService;
-import com.example.carrental.service.PasswordService;
+import com.example.carrental.service.AdministratorService;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,21 +28,22 @@ public class ContractController {
     private ContractService contractService;
     private CarService carService;
     private CustomerService customerService;
+    private AdministratorService administratorService;
 
-    private PasswordService passwordService;
-
-
-    @Autowired
-    public ContractController(ContractService contractService, CarService carService, CustomerService customerService,PasswordService passwordService) {
+    public ContractController(ContractService contractService, CarService carService, CustomerService customerService, AdministratorService administratorService) {
         this.contractService = contractService;
         this.carService = carService;
         this.customerService = customerService;
-        this.passwordService = passwordService;
+        this.administratorService = administratorService;
     }
 
 
     @GetMapping("/newcontract")
-    private String siteAddContract(){
+    private String siteAddContract(@CookieValue(required = false) String passwd){
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         return "home/newcontract";
     }
 
@@ -118,7 +122,10 @@ public class ContractController {
     }
 
     @GetMapping("/showprice")
-    private String Showprice(Model model){
+    private String Showprice(Model model, @CookieValue(required = false) String passwd){
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
 
         List<Contract> contracts = contractService.getlist();
 //dato fra price så man vælger en dato til slutdato og får en pris
@@ -132,12 +139,10 @@ public class ContractController {
     }
 
     @GetMapping("/ShowRepport")
-    private String showRepport(Model model, @RequestParam LocalDate start, @RequestParam LocalDate end,HttpSession httpSession){
-
-        if (!passwordService.checkSession(httpSession)){
+    private String showRepport(Model model, @RequestParam LocalDate start, @RequestParam LocalDate end,HttpSession httpSession, @CookieValue(required = false) String passwd){
+        if (!administratorService.checkCookie(passwd)) {
             return "redirect:/";
         }
-
 
         List<Contract> contracts = contractService.getlist();
         Contract contract1 = new Contract();
@@ -154,22 +159,17 @@ public class ContractController {
     }
 
     @PostMapping("/validate")
-    private String validate(Model model,@RequestParam String logind,HttpSession session){
-        boolean isvalid = false;
-        List<password> passwords = passwordService.getpasswordlist();
-        password password1 = new password();
+    private String validate(Model model,@RequestParam String logind,HttpSession session, HttpServletResponse response){
+        String passwd = administratorService.getAdministrator().getPassword();
+        boolean isvalid = passwd.equals(logind);
 
-        for (int i = 0; i < passwords.size(); i++) {
-            password1 = passwords.get(i);
-            if(password1.getPassword().equals(logind)){
-                isvalid = true;
-                break;
-            }
-
-        }
         if(isvalid){
+            Cookie cookie = new Cookie("passwd", logind);
+            cookie.setPath("/");
+
+            response.addCookie(cookie);
+
             model.addAttribute("logind");
-            session.setAttribute("adminlogin", password1);
             return "home/Menu";
         }else{
             return "home/index";
@@ -178,13 +178,21 @@ public class ContractController {
     }
 
     @GetMapping("/ShowContracts")
-    private String showContracts(Model model){
+    private String showContracts(Model model, @CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("ContractList",contractService.getlistinfo());
         return "home/Contracts";
     }
 
     @GetMapping("/Editcontract")
-    private String editcontract(Model model, @RequestParam int contract_id){
+    private String editcontract(Model model, @RequestParam int contract_id, @CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("contractedit",contractService.getContract(contract_id));
         return "home/EditContract";
     }
@@ -196,7 +204,11 @@ public class ContractController {
     }
 
     @GetMapping("/comfirmDelete")
-    private String comfirmDelete(Model model,@RequestParam int contract_id){
+    private String comfirmDelete(Model model,@RequestParam int contract_id, @CookieValue(required = false) String passwd) {
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("contractid",contract_id);
         model.addAttribute(contractService.getContract(contract_id));
         return "home/comfirmdelete";
