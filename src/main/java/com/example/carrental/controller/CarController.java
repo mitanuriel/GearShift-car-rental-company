@@ -1,5 +1,7 @@
 package com.example.carrental.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -13,6 +15,7 @@ import com.example.carrental.service.CarService;
 import com.example.carrental.service.EquipmentService;
 import com.example.carrental.service.AdministratorService;
 import com.example.carrental.model.Car;
+import com.example.carrental.model.CarImage;
 
 @Controller
 public class CarController {
@@ -34,13 +37,23 @@ public class CarController {
             return "redirect:/";
         }
 
+        List<Car> cars;
+
         if (stateFilter.equals("All")) {
-            model.addAttribute("cars", carService.getAllCars());
+            cars = carService.getAllCars();
         } else {
-            model.addAttribute("cars", carService.getCarsByState(stateFilter));
+            cars = carService.getCarsByState(stateFilter);
         }
 
-        model.addAttribute("carImageService", carImageService);
+        for (Car car : cars) {
+            List<CarImage> carImages = carImageService.getAllImages(car.getCar_id());
+
+            if (car.getImage() == null && !carImages.isEmpty()) {
+                car.setImage(carImages.get(0).getImage());
+            }
+        }
+
+        model.addAttribute("cars", cars);
         model.addAttribute("stateFilter", stateFilter);
         return "home/showCars";
     }

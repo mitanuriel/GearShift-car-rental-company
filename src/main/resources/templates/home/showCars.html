@@ -40,16 +40,11 @@
 
     <div class="car-list">
         <table class="car-form-table" th:each="car : ${cars}">
-            <tr th:if="${car.image != null}">
+            <tr th:unless="${car.image == null}">
                 <td><img th:src="@{'data:;base64,' + ${car.encodeImageToBase64String()}}" height="125"></td>
             </tr>
-            <tr th:if="${car.image == null and carImageService.getAllImages(car.car_id).isEmpty()}">
+            <tr th:if="${car.image == null}">
                 <td>[No image]</td>
-            </tr>
-            <tr th:if="${car.image == null and !carImageService.getAllImages(car.car_id).isEmpty()}">
-                <td>
-                    <img th:src="@{'data:;base64,' + ${carImageService.getFirstImageAsString(car.car_id)}}" height="125">
-                </td>
             </tr>
             <tr>
                 <td>Model</td>
