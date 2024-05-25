@@ -12,6 +12,10 @@ import java.util.List;
 public class CustomerRepository {
     private JdbcTemplate jdbcTemplate;
 
+    public CustomerRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public List<Customer> getCustomerid(String phonenumber) {
         String query = "SELECT * FROM customer WHERE phone_number = ?;";
         BeanPropertyRowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
