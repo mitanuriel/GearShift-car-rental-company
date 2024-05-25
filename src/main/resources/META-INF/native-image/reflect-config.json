@@ -46,5 +46,9 @@
     "allDeclaredFields": true,
     "allDeclaredConstructors": true,
     "allDeclaredMethods": true
+  },
+  {
+    "name":"java.util.ArrayList",
+    "allDeclaredMethods": true
   }
 ]
