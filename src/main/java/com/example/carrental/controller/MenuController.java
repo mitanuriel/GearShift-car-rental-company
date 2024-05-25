@@ -17,7 +17,11 @@ public class MenuController {
     }
 
     @GetMapping("/gotoContracts")
-    public String gotocontract(){
+    public String gotocontract(@CookieValue(required = false) String passwd){
+        if (!administratorService.checkCookie(passwd)) {
+            return "redirect:/";
+        }
+        
         return "home/newcontract";
     }
 

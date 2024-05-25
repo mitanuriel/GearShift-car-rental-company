@@ -39,11 +39,11 @@
 
 
 <section class="add-car-section">
-    <div class="form-group">
+    <div class="form-group" th:if="${message != null or Error != null}">
     <div class="price-container">
         <span class="price-label"></span>
-        <span class="price-value2"  th:text="${message}" ></span>
-        <span class="price-value"  th:text="${Error}" ></span>
+        <span class="price-value2"  th:text="${message}"></span>
+        <span class="price-value"  th:text="${Error}"></span>
     </div>
     </div>
 
