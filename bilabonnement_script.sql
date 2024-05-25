@@ -23,7 +23,7 @@ CREATE TABLE car (
     co2_emissions INT,
     image MEDIUMBLOB,
     administrator_id INT DEFAULT 1,
-    state ENUM('In storage', 'Being used', 'Under inspection'),
+    state ENUM('In storage', 'Being used', 'Under inspection', 'Out of commission'),
     PRIMARY KEY (car_id),
     FOREIGN KEY (administrator_id) REFERENCES administrator(administrator_id)
 );
