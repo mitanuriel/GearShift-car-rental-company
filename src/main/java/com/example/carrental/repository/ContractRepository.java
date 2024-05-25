@@ -2,7 +2,6 @@ package com.example.carrental.repository;
 
 import com.example.carrental.model.Contract;
 import com.example.carrental.model.contractlist;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,9 +12,11 @@ import java.util.List;
 
 @Repository
 public class ContractRepository {
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
+    public ContractRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public void createContract(int customerId, int carId, LocalDate contractStart, LocalDate contractEnd, double price) {
         String query = "insert into contract (customer_id, car_id, contract_start,contract_end,price)" + "values(?, ?, ?, ?, ?);";
