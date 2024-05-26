@@ -19,7 +19,7 @@ CREATE TABLE car (
     monthly_price FLOAT,
     brand VARCHAR(255),
     license_plate VARCHAR(255),
-    chassis_number VARCHAR(6),
+    chassis_number VARCHAR(255),
     co2_emissions INT,
     image MEDIUMBLOB,
     administrator_id INT DEFAULT 1,
