@@ -11,6 +11,9 @@ CREATE TABLE administrator (
     PRIMARY KEY (administrator_id)
 );
 
+INSERT INTO administrator(administrator_id, password)
+VALUES (1, '123'); 
+
 CREATE TABLE car (
     car_id INT AUTO_INCREMENT,
     model VARCHAR(255),
