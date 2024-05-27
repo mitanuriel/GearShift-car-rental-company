@@ -12,7 +12,7 @@ public class contractlist {
     public contractlist(){
 
     }
-
+    //lavet af Hung
     public contractlist(int contract_id, String phone_number, String chassis_number, LocalDate contract_start, LocalDate contract_end, float price) {
         this.contract_id = contract_id;
         this.phone_number = phone_number;

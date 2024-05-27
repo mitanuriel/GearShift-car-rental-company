@@ -24,13 +24,14 @@ public class CarController {
     private EquipmentService equipmentService;
     private AdministratorService administratorService;
 
+    //lavet af Oliver
     public CarController(CarService carService, CarImageService carImageService, EquipmentService equipmentService, AdministratorService administratorService) {
         this.carService = carService;
         this.carImageService = carImageService;
         this.equipmentService = equipmentService;
         this.administratorService = administratorService;
     }
-
+    //lavet af Oliver
     @GetMapping("/showCars")
     public String showCars(Model model, @RequestParam(defaultValue = "All") String stateFilter, @CookieValue(required = false) String passwd) {
         if (!administratorService.checkCookie(passwd)) {
@@ -57,7 +58,7 @@ public class CarController {
         model.addAttribute("stateFilter", stateFilter);
         return "home/showCars";
     }
-    
+    //lavet af Oliver
     @PostMapping("/newCar")
     public String configureNew(Model model, @RequestParam String stateFilter) {
         model.addAttribute("car", new Car());
@@ -65,7 +66,7 @@ public class CarController {
         model.addAttribute("stateFilter", stateFilter);
         return "home/newCar";
     }
-
+    //lavet af Oliver
     @PostMapping("/editCar")
     public String editCar(Model model, @RequestParam int car_id, @RequestParam String stateFilter) {
         model.addAttribute("car", carService.getCar(car_id));
@@ -73,7 +74,7 @@ public class CarController {
         model.addAttribute("stateFilter", stateFilter);
         return "home/newCar";
     }
-
+    //lavet af Oliver
     @PostMapping("/updateDB")
     public String updateDB(Model model, @ModelAttribute Car car, @RequestParam String action, @RequestParam String stateFilter, @RequestParam(required = false) String image) {
         if (image != null) {
@@ -88,7 +89,7 @@ public class CarController {
             return "redirect:/carDetails?car_id=" + car.getCar_id() + "&stateFilter=" + stateFilter;
         }
     }
-
+    //lavet af Oliver
     @GetMapping("/carDetails")
     public String viewProductDetails(Model model, @RequestParam int car_id, @RequestParam(defaultValue = "All") String stateFilter, @CookieValue(required = false) String passwd) {
         if (!administratorService.checkCookie(passwd)) {
@@ -101,7 +102,7 @@ public class CarController {
         model.addAttribute("stateFilter", stateFilter);
         return "home/carDetails";
     }
-
+    //lavet af Oliver
     @PostMapping("/deleteCar")
     public String deleteProduct(@RequestParam int car_id, @RequestParam String stateFilter) {
         carService.delete(car_id);

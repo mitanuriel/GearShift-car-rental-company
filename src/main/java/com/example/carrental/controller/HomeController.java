@@ -14,7 +14,7 @@ public class HomeController {
     public HomeController(AdministratorService administratorService) {
         this.administratorService = administratorService;
     }
-
+    //lavet af Oliver
     @GetMapping("/")
     public String index(@CookieValue(required = false) String passwd) {
         if (administratorService.checkCookie(passwd)) {

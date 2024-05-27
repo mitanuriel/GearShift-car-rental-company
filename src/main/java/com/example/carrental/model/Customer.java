@@ -7,7 +7,7 @@ public class Customer {
     private String phone_number;
     private String address;
 
-
+    //lavet af Hung
     public Customer(){
 
     }

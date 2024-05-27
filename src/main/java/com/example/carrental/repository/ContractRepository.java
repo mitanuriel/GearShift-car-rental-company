@@ -17,29 +17,31 @@ public class ContractRepository {
     public ContractRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
+    //lavet af Hung
     public void createContract(int customerId, int carId, LocalDate contractStart, LocalDate contractEnd, double price) {
         String query = "insert into contract (customer_id, car_id, contract_start,contract_end,price)" + "values(?, ?, ?, ?, ?);";
         jdbcTemplate.update(query, customerId,carId,contractStart,contractEnd,price);
     }
-
+    //lavet af Hung
     public List<Contract> getlist() {
         String query = "select * from contract";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return jdbcTemplate.query(query,rowMapper);
     }
+    //lavet af Hung
     public List<contractlist> getlistinfo() {
         String query = "SELECT c.contract_id, cu.phone_number, ca.chassis_number, c.contract_start, c.contract_end, c.price" + " FROM contract c" + " INNER JOIN car ca ON c.car_id = ca.car_id" + " INNER JOIN customer cu ON c.customer_id = cu.customer_id;";
         RowMapper<contractlist> rowMapper = new BeanPropertyRowMapper<>(contractlist.class);
         return jdbcTemplate.query(query,rowMapper);
     }
+    //lavet af Hung
     public Contract getContract(int contractId) {
         String query = "SELECT * FROM contract WHERE contract_id = ?;";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return jdbcTemplate.queryForObject(query, rowMapper, contractId);
     }
 
-
+//lavet af Hung
 
     public void updateContract(int contract_id,int custumerId, int carId, LocalDate contractStart, LocalDate contractEnd, double price) {
         String query = "UPDATE contract "
@@ -51,7 +53,7 @@ public class ContractRepository {
                 + "WHERE contract_id = ?;";
         jdbcTemplate.update(query,custumerId,carId,contractStart,contractEnd,price,contract_id);
     }
-
+    //lavet af Hung
     public void deletecontract(int contractId) {
         String query = "DELETE FROM damages WHERE contract_id = ?";
         jdbcTemplate.update(query, contractId);

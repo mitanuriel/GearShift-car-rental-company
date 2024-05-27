@@ -3,6 +3,7 @@ package com.example.carrental.model;
 import java.time.LocalDate;
 
 public class Contract {
+
     private int contract_id;
     private int customer_id;
     private int car_id;
@@ -10,6 +11,7 @@ public class Contract {
     private LocalDate contract_end;
     private double price;
 
+    //lavet af Hung
     public Contract(){
 
     }

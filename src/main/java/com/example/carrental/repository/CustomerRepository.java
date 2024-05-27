@@ -15,38 +15,38 @@ public class CustomerRepository {
     public CustomerRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
+    //lavet af Hung
     public List<Customer> getCustomerid(String phonenumber) {
         String query = "SELECT * FROM customer WHERE phone_number = ?;";
         BeanPropertyRowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return  jdbcTemplate.query(query, rowMapper, phonenumber);
 
     }
-
+    //lavet af Hung
     public List<Customer> getcustomerlist() {
         String query = "SELECT * FROM customer;";
         BeanPropertyRowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return jdbcTemplate.query(query, rowMapper);
     }
 
-
+    //lavet af Hung
     public void addCustomer(String name, String email, String phoneNumber, String address) {
         String query = "INSERT INTO customer (name, email, phone_number, address) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(query,name,email,phoneNumber,address);
     }
 
-
+    //lavet af Hung
     public void delete(int customerid) {
         String query = "DELETE FROM customer WHERE customer_id = ?";
         jdbcTemplate.update(query, customerid);
     }
-
+    //lavet af Hung
     public Customer getperson(int customerid) {
         String query = "SELECT * FROM customer WHERE customer_id = ?;";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return jdbcTemplate.queryForObject(query, rowMapper, customerid);
     }
-
+    //lavet af Hung
     public void editcustomer(int customerid, String name, String email, String phonenumber, String address) {
         String query = "UPDATE customer "
                 + "SET name = ?, "

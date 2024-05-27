@@ -12,7 +12,7 @@ public class Car {
     private String co2_emissions;
     private byte[] image;
     private String state;
-
+    //lavet af Oliver
     public Car() {
     }
     

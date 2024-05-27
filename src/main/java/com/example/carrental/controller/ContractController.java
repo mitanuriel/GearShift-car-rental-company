@@ -28,6 +28,7 @@ public class ContractController {
     private CarService carService;
     private CustomerService customerService;
     private AdministratorService administratorService;
+    //lavet af Hung
 
     public ContractController(ContractService contractService, CarService carService, CustomerService customerService, AdministratorService administratorService) {
         this.contractService = contractService;
@@ -36,7 +37,7 @@ public class ContractController {
         this.administratorService = administratorService;
     }
 
-
+    //lavet af Hung
     @GetMapping("/newcontract")
     private String siteAddContract(@CookieValue(required = false) String passwd){
         if (!administratorService.checkCookie(passwd)) {
@@ -45,7 +46,7 @@ public class ContractController {
 
         return "home/newcontract";
     }
-
+    //lavet af Hung
     @PostMapping("/newcontract1")
     private String addContract(Model model,@RequestParam String phonenumber, @RequestParam String chassisnumber, @RequestParam LocalDate contract_start, @RequestParam LocalDate contract_end){
         List<Contract> contracts = contractService.getlist();
@@ -119,7 +120,7 @@ public class ContractController {
         //kan testes mere,
 
     }
-
+    //lavet af Hung
     @GetMapping("/showprice")
     private String Showprice(Model model, @CookieValue(required = false) String passwd){
         if (!administratorService.checkCookie(passwd)) {
@@ -136,7 +137,7 @@ public class ContractController {
 
         return "home/newcontract";
     }
-
+    //lavet af Hung
     @GetMapping("/ShowRepport")
     private String showRepport(Model model, @RequestParam LocalDate start, @RequestParam LocalDate end,HttpSession httpSession, @CookieValue(required = false) String passwd){
         if (!administratorService.checkCookie(passwd)) {
@@ -156,7 +157,7 @@ public class ContractController {
         model.addAttribute("timeprice","this period you got " + start + " to " + end + " = "+price +"kr.");
         return "home/ShowRepport";
     }
-
+    //lavet af Oliver
     @PostMapping("/validate")
     private String validate(Model model,@RequestParam String logind,HttpSession session, HttpServletResponse response){
         String passwd = administratorService.getAdministrator().getPassword();
@@ -175,7 +176,7 @@ public class ContractController {
         }
 
     }
-
+    //lavet af Hung
     @GetMapping("/ShowContracts")
     private String showContracts(Model model, @CookieValue(required = false) String passwd) {
         if (!administratorService.checkCookie(passwd)) {
@@ -185,7 +186,7 @@ public class ContractController {
         model.addAttribute("ContractList",contractService.getlistinfo());
         return "home/Contracts";
     }
-
+    //lavet af Hung
     @GetMapping("/Editcontract")
     private String editcontract(Model model, @RequestParam int contract_id, @CookieValue(required = false) String passwd) {
         if (!administratorService.checkCookie(passwd)) {
@@ -195,13 +196,13 @@ public class ContractController {
         model.addAttribute("contractedit",contractService.getContract(contract_id));
         return "home/EditContract";
     }
-
+    //lavet af Hung
     @PostMapping("/updateContract")
     private String updatecontract(@RequestParam int contract_id,@RequestParam int custumer_id,@RequestParam int car_id,@RequestParam LocalDate contract_start ,@RequestParam LocalDate contract_end , @RequestParam double price){
         contractService.updateContract(contract_id,custumer_id,car_id,contract_start,contract_end,price);
         return "redirect:/" + "ShowContracts?";
     }
-
+    //lavet af Hung
     @GetMapping("/comfirmDelete")
     private String comfirmDelete(Model model,@RequestParam int contract_id, @CookieValue(required = false) String passwd) {
         if (!administratorService.checkCookie(passwd)) {
@@ -212,6 +213,7 @@ public class ContractController {
         model.addAttribute(contractService.getContract(contract_id));
         return "home/comfirmdelete";
     }
+    //lavet af Hung
     @PostMapping("/delete")
     private String delete(@RequestParam int contract_id){
         contractService.delete(contract_id);

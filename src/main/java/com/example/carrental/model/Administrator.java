@@ -6,7 +6,7 @@ public class Administrator {
     public Administrator(){
 
     }
-
+    //lavet af Oliver
     public Administrator(String password) {
         this.password = password;
     }

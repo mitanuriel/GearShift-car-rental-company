@@ -22,20 +22,20 @@ public class CarImageController {
     private CarImageService carImageService;
     private CarService carService;
     private AdministratorService administratorService;
-
+    //lavet af Oliver
     public CarImageController(CarImageService carImageService, CarService carService, AdministratorService administratorService) {
         this.carImageService = carImageService;
         this.carService = carService;
         this.administratorService = administratorService;
     }
-    
+    //lavet af Oliver
     @PostMapping("/deleteAdditionalImage")
     public String deleteAdditionalImage(@RequestParam int car_image_id, @RequestParam int car_id, @RequestParam String stateFilter) {
         carImageService.delete(car_image_id);
         
         return "redirect:/editImages?car_id=" + car_id + "&stateFilter=" + stateFilter;
     }
-
+    //lavet af Oliver
     @PostMapping("/addAdditionalImage")
     public String addAdditionalImage(Model model, @RequestParam int car_id, @RequestParam String stateFilter, @RequestParam MultipartFile image) throws IOException {
         if ( !(image.isEmpty()) ) {
@@ -51,7 +51,7 @@ public class CarImageController {
 
         return "redirect:/editImages?car_id=" + car_id + "&stateFilter=" + stateFilter;
     }
-
+    //lavet af Oliver
     @GetMapping("/editImages")
     public String editImages(Model model, @RequestParam int car_id, @RequestParam(defaultValue = "All") String stateFilter, @CookieValue(required = false) String passwd) {
         if (!administratorService.checkCookie(passwd)) {
@@ -63,7 +63,7 @@ public class CarImageController {
         model.addAttribute("carImages", carImageService.getAllImages(car_id));
         return "home/editImages";
     }
-
+    //lavet af Oliver
     @PostMapping("/saveImage")
     public String saveImage(Model model, @RequestParam int car_id, @RequestParam String stateFilter, @RequestParam MultipartFile image) throws IOException {
         if ( !(image.isEmpty()) ) {
@@ -80,7 +80,7 @@ public class CarImageController {
 
         return "redirect:/editImages?car_id=" + car_id + "&stateFilter=" + stateFilter;
     }
-
+    //lavet af Oliver
     @PostMapping("/deleteImage")
     public String deleteImage(@RequestParam int car_id, @RequestParam String stateFilter) {
         Car car = carService.getCar(car_id);

@@ -16,12 +16,13 @@ import com.example.carrental.service.AdministratorService;
 public class EquipmentController {
     private EquipmentService equipmentService;
     private AdministratorService administratorService;
+    //lavet af Oliver
 
     public EquipmentController(EquipmentService equipmentService, AdministratorService administratorService) {
         this.equipmentService = equipmentService;
         this.administratorService = administratorService;
     }
-    
+    //lavet af Oliver
     @GetMapping("/editEquipment")
     public String editEquipment(Model model, @RequestParam int car_id, @RequestParam(defaultValue = "All") String stateFilter, @CookieValue(required = false) String passwd) {
         if (!administratorService.checkCookie(passwd)) {
@@ -35,14 +36,14 @@ public class EquipmentController {
         
         return "home/editEquipment";
     }
-
+    //lavet af Oliver
     @PostMapping("/deleteEquipment")
     public String updateEquipment(Model model, @RequestParam int equipment_id, @RequestParam int car_id, @RequestParam String stateFilter) {
         equipmentService.delete(equipment_id);
 
         return "redirect:/editEquipment?car_id=" + car_id + "&stateFilter=" + stateFilter;
     }
-
+    //lavet af Oliver
     @PostMapping("/insertEquipment")
     public String insertEquipment(Model model, @ModelAttribute Equipment equipment, @RequestParam String stateFilter) {
         equipmentService.insert(equipment);

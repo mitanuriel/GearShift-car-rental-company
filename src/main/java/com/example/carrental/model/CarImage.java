@@ -6,7 +6,7 @@ public class CarImage {
     private int car_image_id;
     private byte[] image;
     private int car_id;
-
+    //lavet af Oliver
     public CarImage() {
     }
 

@@ -18,14 +18,14 @@ public class DamagesController {
     public DamagesController(DamagesService damagesService) {
         this.damagesService = damagesService;
     }
-    
+    //lavet af Oliver
     @PostMapping("/updateDamages")
     public String updateDamages(@ModelAttribute Damages damages) {
         damagesService.update(damages);
 
         return "redirect:/showDamageReport?contract_id=" + damages.getContract_id();
     }
-
+    //lavet af Oliver
     @GetMapping("/showDamageReport")
     public String showDamageReport(Model model, @RequestParam int contract_id) {
         if (damagesService.getDamages(contract_id).isEmpty()) {

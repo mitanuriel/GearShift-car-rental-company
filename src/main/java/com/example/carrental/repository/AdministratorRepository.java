@@ -12,6 +12,7 @@ public class AdministratorRepository {
     public AdministratorRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    //lavet af Oliver
 
     public Administrator getAdministrator() {
         String query = "select * from administrator WHERE administrator_id = 1;";

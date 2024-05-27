@@ -4,7 +4,7 @@ public class Equipment {
     private int equipment_id;
     private String description;
     private int car_id;
-
+    //lavet af Oliver
     public Equipment() {
     }
 

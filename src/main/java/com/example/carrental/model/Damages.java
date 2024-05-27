@@ -5,7 +5,7 @@ public class Damages {
     private String description;
     private double price;
     private int contract_id;
-
+    //lavet af Oliver
     public Damages() {
     }
 
