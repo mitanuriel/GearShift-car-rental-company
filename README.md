@@ -57,7 +57,7 @@ Udskift `mvn` med maven wrapper kommando, hvis du ikke har det installeret.
 
 ### Kør programmet
 Efter succesfuld kompilering vil der være en target mappe i roden af projektet.
-I denne mappe vil være en jar file med navnet `Carrental-0.0.1-SNAPSHOT.jar`.
+I denne mappe vil være en jar fil med navnet `Carrental-0.0.1-SNAPSHOT.jar`.
 
 Kør kommandoen:
 ```shell
