@@ -6,7 +6,9 @@ License Free
 
 ### Nødvendig software
 Du skal installere en Java JDK version 17 eller nyere.
+
 Du skal installere en MySQL server.
+
 Du skal installere git.
 
 ### Klon projektet
