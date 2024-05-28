@@ -2,6 +2,7 @@ Image:
 Base model Midjourney 5.2
 License Free
 
+---
 ## Installeringssvejledning
 
 ### Nødvendig software:
@@ -65,3 +66,5 @@ java -jar target/Carrental-0.0.1-SNAPSHOT.jar
 ```
 
 Du kan også flytte jar filen til en anden lokation og køre den derfra.
+
+**VIGTIGT!** Sæt miljøvariablen ``dbpw`` til kodeordet for bruger5. CREATE-scriptet sætter det automatisk til ``12345``, men du kan ændre det, hvis du vil.
