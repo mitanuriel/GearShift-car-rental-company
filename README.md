@@ -4,12 +4,10 @@ License Free
 
 ## Installeringssvejledning
 
-### Nødvendig software
-Du skal installere en Java JDK version 17 eller nyere.
-
-Du skal installere en MySQL server.
-
-Du skal installere git.
+### Nødvendig software:
+- [OpenJDK](https://openjdk.org/) version 17 eller nyere
+- [MySQL](https://www.mysql.com/) server
+- [Git](https://git-scm.com/)
 
 ### Klon projektet
 Åben en terminal, og skriv:
