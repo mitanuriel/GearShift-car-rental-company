@@ -31,7 +31,7 @@ class CarrentalApplicationTests {
         List<Car> carsBefore = carRepository.getAllCars();
         int beforeDeleted = carsBefore.size();
         // Vi skal vælge en bil id at slette, vi vælger en arbitrær værdi fra tabellen.
-        // Vi tager i det her eksempel car id 30
+        // Vi tager i det her eksempel car id 3
         carRepository.delete(3);
         List<Car> carsAfter = carRepository.getAllCars();
         int afterDeleted = carsAfter.size();
