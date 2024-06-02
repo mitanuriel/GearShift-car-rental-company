@@ -26,6 +26,50 @@
             font-size: 1.2em;
             color: green;
         }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        .table-wrapper {
+            width: 45%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #009879;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        td {
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -89,5 +133,54 @@
 
 </section>
 
+<div class="container">
+    <div class="table-wrapper">
+        <table class="car-table">
+            <thead>
+            <tr>
+                <th><strong>Model</strong></th>
+                <th><strong>Monthly Price</strong></th>
+                <th><strong>Brand</strong></th>
+                <th><strong>License Plate</strong></th>
+                <th><strong>Chassis Number</strong></th>
+                <th><strong>CO2 Emissions</strong></th>
+                <th><strong>State</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="list : ${Carlist}">
+                <td><strong th:text="${list.model}"></strong></td>
+                <td><strong th:text="${list.monthly_price}"></strong></td>
+                <td><strong th:text="${list.brand}"></strong></td>
+                <td><strong th:text="${list.license_plate}"></strong></td>
+                <td><strong th:text="${list.chassis_number}"></strong></td>
+                <td><strong th:text="${list.co2_emissions}"></strong></td>
+                <td><strong th:text="${list.state}"></strong></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="customer-table">
+            <thead>
+            <tr>
+                <th><strong>Name</strong></th>
+                <th><strong>Email</strong></th>
+                <th><strong>Phone Number</strong></th>
+                <th><strong>Address</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="list : ${customerlist}">
+                <td><strong th:text="${list.name}"></strong></td>
+                <td><strong th:text="${list.email}"></strong></td>
+                <td><strong th:text="${list.phone_number}"></strong></td>
+                <td><strong th:text="${list.address}"></strong></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

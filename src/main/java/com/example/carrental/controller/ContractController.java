@@ -36,7 +36,20 @@ public class ContractController {
         this.customerService = customerService;
         this.administratorService = administratorService;
     }
+    @GetMapping("/showcarsincontract")
+    private String getcarsavaible(Model model,@RequestParam(defaultValue = "In storage")  String stateFilter){
+        List<Car> cars = carService.getCarsByState(stateFilter);
 
+        List<Customer> customers = customerService.getcostumerlist();
+
+        model.addAttribute("stateFilterincontrakt",stateFilter);
+        model.addAttribute("Carlist",cars);
+
+        model.addAttribute("customerlist",customers);
+
+
+        return "home/newcontract";
+    }
     //lavet af Hung
     @GetMapping("/newcontract")
     private String siteAddContract(@CookieValue(required = false) String passwd){
@@ -48,11 +61,12 @@ public class ContractController {
     }
     //lavet af Hung
     @PostMapping("/newcontract1")
-    private String addContract(Model model,@RequestParam String phonenumber, @RequestParam String chassisnumber, @RequestParam LocalDate contract_start, @RequestParam LocalDate contract_end){
+    private String addContract(Model model,@RequestParam String phonenumber, @RequestParam String chassisnumber, @RequestParam LocalDate contract_start, @RequestParam LocalDate contract_end,@RequestParam(defaultValue = "In storage")  String stateFilter){
         List<Contract> contracts = contractService.getlist();
-
+        model.addAttribute("Carlist", carService.getCarsByState(stateFilter));
         Contract contract1 = new Contract();
 
+        model.addAttribute("customerlist",customerService.getcostumerlist());
         List<Customer> customer = customerService.getCustomer(phonenumber);
         if (customer.isEmpty()) {
             model.addAttribute("Error", "Customer with the provided phone number does not exist.");
